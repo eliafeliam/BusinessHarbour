@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>mainPage</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+</head>
+<header th:insert="main/header::headerPlusCss" ></header>
+<body background="/images/mainPage/background.jpg">
+<main>
+    <section class="py-5 text-center container">
+            <div class="row py-lg-5">
+                <div class="col-lg-12 col-md-14 mx-auto">
+                    <h1 class="fw-light">Imperial Furniture</h1>
+                    <p class="lead u-text-grey-dark-1">Tutaj możesz zamówić meble do domu lub biura</p>
+                    <p>
+                        <a th:href="@{furniture/callMe}" class="btn btn-primary my-2">Zamów połączenie</a>
+                        <a href="furniture/aboutCompany" class="btn btn-secondary my-2">O naszej firmie</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="album py-5 bg-light">
+        <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <svg class="bd-placeholder-img card-img-top"  width="100%" height="339" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect  fill="#ffffff"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text><image  width="100%" height="339" xlink:href="/images/mainPage/bed.jpg"></image></svg>
+                        <div class="card-body">
+                            <p class="card-text">Łóżka do sypialni</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <form action ="/furniture/showAll/bed">
+                                        <button class="btn btn-sm btn-outline-secondary">Popatrzeć</button>
+                                    </form>
+                                </div>
+                                <small class="text-muted">Sekcja: łóżka</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <svg class="bd-placeholder-img card-img-top" width="100%" height="339" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect  width="100%" height="225" fill="#ffffff"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text><image width="100%" height="339" xlink:href="/images/mainPage/sofa.jpg"></image></svg>
+
+                        <div class="card-body">
+                            <p class="card-text">Sofy</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <form action ="/furniture/showAll/sofa">
+                                        <button class="btn btn-sm btn-outline-secondary">Popatrzeć</button>
+                                    </form>
+                                </div>
+                                <small class="text-muted">Dział: sofy</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <svg class="bd-placeholder-img card-img-top" width="100%" height="339" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#ffffff"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text><image width="100%" height="339" xlink:href="/images/mainPage/chair.jpg"></image></svg>
+
+                        <div class="card-body">
+                            <p class="card-text">Luksusowe krzesła</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <form action ="/furniture/showAll/chair">
+                                        <button class="btn btn-sm btn-outline-secondary">Popatrzeć</button>
+                                    </form>
+                                </div>
+                                <small class="text-muted">Sekcja: krzesła</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+    <div th:insert="main/footer::footerPlusCss"></div>
+</body>
+
+</html>

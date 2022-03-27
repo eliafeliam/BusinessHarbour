@@ -1,0 +1,5 @@
+project\controller\StartPageControllerTest.class
+project\controller\LoginControllerTest.class
+project\repository\UserRepositoryTest.class
+project\controller\FurnitureControllerTest.class
+project\repository\OrderRepositoryTest.class

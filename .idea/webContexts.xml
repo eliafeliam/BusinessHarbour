@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebContextManager">
+    <option name="state">
+      <map>
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/ForAdmin/editPerson.html" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/ForAdmin" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/ForClient/cart.html" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/ForClient" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/ForClient/infoDelivery.html" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/ForClient" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/ForClient/mainPage.html" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/ForClient" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/ForEmployee/allOrders.html" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/ForEmployee" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/ForEmployee/show.html" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/ForEmployee" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/account/account.html" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/account" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/first/hello.html" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/first" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/furnitureForClients/allTheBeds.html" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/furnitureForClients" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/furnitureForClients/cart.html" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/furnitureForClients" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/furnitureForClients/mainPage.html" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/furnitureForClients" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/furnitureForClients/registration.html" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/furnitureForClients" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/furnitureForClients/specificElement.html" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/furnitureForClients" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/furnitureForEmployees/new.html" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/furnitureForEmployees" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/main/header.html" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/main" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/people/edit.html" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/people" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/product/selectedElement.html" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/product" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/staticElements/footer.html" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/staticElements" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/staticElements/header.html" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/staticElements" />
+      </map>
+    </option>
+  </component>
+</project>
