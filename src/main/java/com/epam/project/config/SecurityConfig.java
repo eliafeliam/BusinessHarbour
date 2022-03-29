@@ -46,24 +46,29 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin/**").hasAuthority("admin:write")
 
                 .antMatchers("/employee/**").hasAnyAuthority("employee:write","admin:write")
+                .antMatchers("/order/**").hasAnyAuthority("employee:write","admin:write")
 
                 //Dostęp dozwolony dla wszystkich użytkowników
                 .antMatchers("/furniture/**").permitAll()
 
                 // Dostęp tylko dla niezarejestrowanych użytkowników
                 .antMatchers("/register").not().fullyAuthenticated()
+                .antMatchers("/login").not().fullyAuthenticated()
 
                 //Dodaj 2 dodatkowe punkty końcowe
                 // i włącz nadpisanie formularza autoryzacji
                 .and()
                 .formLogin()
                 //Wszyscy mają dostęp do tej strony
-                .loginPage("/login").permitAll()
+                .loginPage("/login")
+
 
                 //Jeśli wszystko jest w porządku, przekieruj na stronę
                 .defaultSuccessUrl("/furniture")
+                .and().
+                exceptionHandling().accessDeniedPage("/furniture/forbidden")
 
-                // A także w konfiguracji rozważ:
+                // A także w konfiguracji uwzględniamy
                 .and()
                 .rememberMe().userDetailsService(userDetailsService)
                 .and()

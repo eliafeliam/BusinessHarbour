@@ -27,26 +27,26 @@ public class FurnitureController {
     @GetMapping()
     public String index(Model model) {
         model.addAttribute("productList", employeeDAO.getAllProducts());
-        return "product/allProducts";
+        return "employee/allProducts";
     }
 
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int id, Model model) {
         model.addAttribute("selectedElement", employeeDAO.getProductById(id));
-        return "product/show";
+        return "employee/show";
     }
 
     @GetMapping("/new")
     //ModelAttribute создаёт новый обьект типа Product и передаёт его в модель под ключём goods в представление
     public String newPerson(@ModelAttribute("newProduct") Product goods) {
-        return "product/new";
+        return "employee/new";
     }
 
     @PostMapping()
     public String create(@ModelAttribute("newProduct") @Valid Product goods,
                          BindingResult bindingResult) {
         if (bindingResult.hasErrors())
-            return "product/new";
+            return "employee/new";
 
         employeeDAO.save(goods);
         return "redirect:/employee";
@@ -55,14 +55,14 @@ public class FurnitureController {
     @GetMapping("/{id}/edit")
     public String edit(Model model, @PathVariable("id") int id) {
         model.addAttribute("selectedElement", employeeDAO.getProductById(id));
-        return "product/edit";
+        return "employee/edit";
     }
 
     @PatchMapping("/{id}")
     public String update(@ModelAttribute("selectedElement") @Valid Product goods, BindingResult bindingResult,
                          @PathVariable("id") int id) {
         if (bindingResult.hasErrors())
-            return "product/edit";
+            return "employee/edit";
 
         employeeDAO.update(id, goods);
         return "redirect:/employee";

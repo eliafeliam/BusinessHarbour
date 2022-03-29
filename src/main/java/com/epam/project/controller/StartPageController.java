@@ -35,23 +35,28 @@ public class StartPageController {
 
     @GetMapping("/aboutCompany")
     public String aboutCompany() {
-        return "main/aboutCompany";
+        return "aboutCompany/aboutCompany";
     }
 
     @GetMapping("/ourContacts")
     public String ourContacts() {
-        return "main/ourContacts";
+        return "ourContacts/ourContacts";
     }
 
     @GetMapping("/callMe")
     public String callMe(@ModelAttribute("user") CallMe user) {
-        return "main/callMe";
+        return "callMe/callMe";
+    }
+
+    @GetMapping("/forbidden")
+    public String forbidden() {
+        return "error/forbidden";
     }
 
     @PostMapping("/saveCall")
     public String saveCall(@ModelAttribute("user") @Valid CallMe callMe, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "main/callMe";
+            return "callMe/callMe";
         }
         callRepository.save(callMe);
         return "redirect:/furniture";

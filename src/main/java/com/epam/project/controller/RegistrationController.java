@@ -34,23 +34,23 @@ public class RegistrationController {
 
     @GetMapping("/registration")
     public String registration(@ModelAttribute("user")UserEntity userEntity) {
-        return "main/registration";
+        return "registration/registration";
     }
 
     @PostMapping("/registration")
     public String userRegistration(@ModelAttribute("user") @Valid UserEntity userEntity,
                                    BindingResult bindingResult, Model model){
         if (bindingResult.hasErrors()) {
-            return "main/registration";
+            return "registration/registration";
         }
         if (!userEntity.getPassword().equals(userEntity.getPasswordConfirm())){
             model.addAttribute("passwordError", "Пароли не совпадают");
-            return "main/registration";
+            return "registration/registration";
         }
         if (userRepository.findByEmail(userEntity.getEmail()).isPresent()){
             model.addAttribute("emailIsAlreadyExist",
                     "Пользователь с таким Email уже существует");
-            return "main/registration";
+            return "registration/registration";
         }
         userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
         userEntity.setRole(Role.USER);
