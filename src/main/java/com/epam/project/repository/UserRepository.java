@@ -5,8 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-//Интерфейс взаимодействия с БД
+//Repozytorium do rejestrowania użytkowników DB
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
-    //Главным индентификатором будет email Optional либо вернёт null либо обьект
+    //Głównym identyfikatorem będzie e-mail Opcjonalny zwróci null lub obiekt
     Optional<UserEntity> findByEmail(String email);
 }

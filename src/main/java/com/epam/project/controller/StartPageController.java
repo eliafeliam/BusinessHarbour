@@ -16,7 +16,6 @@ import java.util.List;
 
 
 @Controller
-@SessionAttributes(value = "productsList")
 @RequestMapping("/furniture")
 
 public class StartPageController {
@@ -75,11 +74,5 @@ public class StartPageController {
     public String showSelectedElement(@PathVariable("id") int id, Model model) {
         model.addAttribute("selectedElement", employeeDAO.getProductById(id));
         return "product/selectedElement";
-    }
-    @ModelAttribute("productsList")
-    public static List<Product> getProductList() {
-        CartNote cartNote = new CartNote();
-        List<Product> productsList = cartNote.getListOfProducts();
-        return productsList;
     }
 }

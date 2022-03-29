@@ -5,38 +5,38 @@
     <body background="/images/registration/background.jpg">
     <form th:action="@{/registration}" th:object="${user}" th:method="POST">
             <div class="container">
-                <h1 style="color: #ffffff; text-shadow: 1px 1px 1px #000000;">Регистрация</h1>
-                <p>Пожалуйста, заполните данные для регистрации на сайте.</p>
+                <h1 style="color: #ffffff; text-shadow: 1px 1px 1px #000000;">Rejestracja</h1>
+                <p style="color: #ffffff; text-shadow: 1px 1px 1px #000000;">Prosimy o wypełnienie danych do rejestracji na stronie.</p>
                 <hr>
 
-                <label style="color: #ffffff; text-shadow: 1px 1px 1px #000000;" class="u-text u-text-1" for="firstName">Enter first name: </label>
+                <label style="color: #ffffff; text-shadow: 1px 1px 1px #000000;" class="u-text u-text-1" for="firstName">Imię pana: </label>
                 <div style="color:red" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First name Error</div>
                 <input type="text" th:field="*{firstName}" id="firstName"/>
 
 
-                <label style="color: #ffffff; text-shadow: 1px 1px 1px #000000;" class="u-text u-text-1" for="lastName">Enter last name: </label>
+                <label style="color: #ffffff; text-shadow: 1px 1px 1px #000000;" class="u-text u-text-1" for="lastName">Nazwisko pana: </label>
                 <div style="color:red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last name Error</div>
                 <input type="text" th:field="*{lastName}" id="lastName"/>
 
-                <label style="color: #ffffff; text-shadow: 1px 1px 1px #000000;" class="u-text u-text-1" for="email">Enter email: </label>
+                <label style="color: #ffffff; text-shadow: 1px 1px 1px #000000;" class="u-text u-text-1" for="email">Email pana: </label>
                 <input type="text" th:field="*{email}" id="email"/>
                 <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</div>
                 <div style="color:red" th:if="${emailIsAlreadyExist}" th:text="${emailIsAlreadyExist}" >Email is present</div>
 
-                <label style="color: #ffffff; text-shadow: 1px 1px 1px #000000;" class="u-text u-text-1" for="password">Enter password: </label>
+                <label style="color: #ffffff; text-shadow: 1px 1px 1px #000000;" class="u-text u-text-1" for="password">hasło pana: </label>
                 <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">password</div>
                 <input type="password" th:field="*{password}" id="password"/>
 
-                <label style="color: #ffffff; text-shadow: 1px 1px 1px #000000;" class="u-text u-text-1" for="passwordConfirm">Enter password: </label>
+                <label style="color: #ffffff; text-shadow: 1px 1px 1px #000000;" class="u-text u-text-1" for="passwordConfirm">Niech pan powtórzy hasło: </label>
                 <div style="color:red" th:if="${#fields.hasErrors('passwordConfirm')}" th:errors="*{passwordConfirm}">passwordConfirm error</div>
                 <div style="color:red" th:if="${passwordError}" th:text="${passwordError}" >Password mismatch</div>
                 <input type="password" th:field="*{passwordConfirm}" id="passwordConfirm"/>
 
-                <button type="submit" class="registerbtn">Создать аккаунт</button>
+                <button type="submit" class="registerbtn">Załóż konto</button>
             </div>
 
             <div class="container signin">
-                <p>У вас уже есть аккаунт?<a href="/login"> Войти</a>.</p>
+                <p>Masz już konto?<a href="/login"> Zalogować</a>.</p>
             </div>
         </form>
     </body>

@@ -2,17 +2,18 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>allTheBeds</title>
+    <title>Wybrany produkt</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
     <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/main/quickViewOfTheProduct.css">
     <link type="text/css" rel="stylesheet" href="/css/generalStyle.css">
+    <link type="text/css" rel="stylesheet" href="/css/main/aboutCompany.css">
 </head>
 <body>
 
 <header th:insert="main/header::headerPlusCss" ></header>
 
-<main>
+<main style="background-image: url(/images/selectedElement/background.jpg)">
     <section class="py-5 text-center container">
         <div class="row py-lg-5">
             <div class="col-lg-6 col-md-8 mx-auto">
@@ -24,14 +25,15 @@
     <div class="container mt-5" >
         <div class="wrap" >
             <div class="alert alert-info mt-2">
-                <a href=""> <img th:src="@{/images/{type}/{image}(type=${selectedElement.getType()},image=${selectedElement.getTitle_image()})}"></a>
+                <a href=""> <img th:src="@{/images/{type}/{image}(image=${selectedElement.getTitle_image()}, type=${selectedElement.getType()})}"></a>
             </div>
         </div>
         <div class="product-info">
             <h3 th:text="${selectedElement.getTitle()}" class="product-title">title</h3>
-            <div class="price"  th:text=" 'Стоимость : ' + ${selectedElement.getPrice()}+'$'"></div>
+            <div class="price"  th:text=" 'Koszt : ' + ${selectedElement.getPrice()}+'$'"></div>
+            <form th:method="POST" th:action="@{/cart/addToCart/{productsID}/(productsID=${selectedElement.getId()})}"><button type="submit" class="btn btn-success">Do koszyka</button></form>
         </div>
-        <p class="text"  th:text="${selectedElement.getDescription()}"></p> </br>
+        <p style="color: #000000;   font-family: verdana; font-size: 110%; text-indent: 10%; text-shadow: 1px 1px 1px #f1eded" th:text="${selectedElement.getDescription()}"></p> </br>
 
     </div>
 </main>

@@ -10,25 +10,25 @@
 </head>
 <header th:insert="main/header::headerPlusCss" ></header>
 
-<body>
-<form style="margin-left: 35%;" class="form-signin" th:method="PATCH" th:action="@{/WEB-INF/views/admin}" th:object="${person}">
+<body style="background-image: url(/images/userList/background.jpg)">
+<form style="margin-left: 35%;" class="form-signin" th:method="PATCH" th:action="@{/admin}" th:object="${person}">
     <div class="text-center mb-4">
-        <h1 style="width: 50%" class="h3 mb-3 font-weight-normal">Изменение обьекта в базе данных</h1>
-        <p style="width: 50%">Измените необходимые данные и отправьте изменения в базу данных</a></p>
+        <h1 style="width: 50%" class="h3 mb-3 font-weight-normal">Zmień użytkownika</h1>
+        <p style="width: 50%">Zmień i potwierdź zmiany w bazie danych</a></p>
     </div>
 
     <div class="form-label-group">
-        <label for="role">Enter role</label>
+        <label for="role">Wskaż rolę</label>
         <input  th:field="*{role}" id="role" class="form-control" placeholder="role" required="" autofocus="" style="width: 50%">
         <div style="color:red" th:if="${#fields.hasErrors('role')}" th:errors="*{role}">Title Error</div>
     </div>
     <div class="form-label-group">
-        <label for="status">Enter role</label>
+        <label for="status">Enter status</label>
         <input  th:field="*{status}" id="status" class="form-control" placeholder="status" required="" autofocus="" style="width: 50%">
         <div style="color:red" th:if="${#fields.hasErrors('status')}" th:errors="*{status}">Title Error</div>
     </div>
     <div class="form-label-group">
-        <label for="email">Enter role</label>
+        <label for="email">Zmień email</label>
         <input  th:field="*{email}" id="email" class="form-control" placeholder="email" required="" autofocus="" style="width: 50%">
         <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email</div>
     </div>
@@ -39,11 +39,11 @@
         <input hidden th:field="*{password}">
     </div>
 
-    <button style="float: left;" class="btn btn-primary"  type="submit">ИЗМЕНИТЬ</button>
+    <button style="float: left;" class="btn btn-primary"  type="submit">Zastosować</button>
 </form>
 
 <form  th:method="DELETE" th:action="@{/admin/{id}(id=${person.getId()})}">
-    <button style="margin-left:250px;" class="btn btn-danger" type="submit" value="Delete" >УДАЛИТЬ</button> <br/>
+    <button style="margin-left:220px;" class="btn btn-danger" type="submit" value="Delete" >Usunąć</button> <br/>
 </form>
 
 

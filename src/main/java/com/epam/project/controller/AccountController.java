@@ -19,6 +19,9 @@ import java.security.Principal;
 import java.util.Collection;
 import java.util.Optional;
 
+//Ten kontroler służy do modyfikowania danych użytkownika i
+// wyświetlania istniejących zamówień dla użytkownika
+
 @Controller
 @RequestMapping("/account")
 public class AccountController {
@@ -40,9 +43,9 @@ public class AccountController {
     public String allAboutUser (HttpServletRequest request, Model model) {
         Principal principal = request.getUserPrincipal();
         Optional<UserEntity> user = userRepository.findByEmail(principal.getName());
-        model.addAttribute("user", user.orElse(new UserEntity("default")));
 
-        Collection<OrderInfo> ordersList = orderRepository.findByEmail(user.orElse(new UserEntity("default")).getEmail());
+        model.addAttribute("user", user.get());
+        Collection<OrderInfo> ordersList = orderRepository.findByEmail(user.orElse(null).getEmail());
         if(ordersList !=null) {
             model.addAttribute("ordersList", ordersList.toArray());
         }
@@ -54,7 +57,7 @@ public class AccountController {
             return "redirect:/account";
         }
         if (!user.getPassword().equals(user.getPasswordConfirm())){
-            model.addAttribute("passwordError", "Пароли не совпадают");
+            model.addAttribute("passwordError", "Hasła nie pasują");
             return "redirect:/account";
         }
             user.setPassword(passwordEncoder.encode(user.getPassword()));

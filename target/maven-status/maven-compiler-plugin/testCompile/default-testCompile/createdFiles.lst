@@ -1,5 +1,5 @@
-com\epam\project\controller\StartPageControllerTest.class
-com\epam\project\controller\LoginControllerTest.class
-com\epam\project\controller\FurnitureControllerTest.class
-com\epam\project\repository\OrderRepositoryTest.class
-com\epam\project\repository\UserRepositoryTest.class
+project\controller\StartPageControllerTest.class
+project\controller\LoginControllerTest.class
+project\repository\UserRepositoryTest.class
+project\controller\FurnitureControllerTest.class
+project\repository\OrderRepositoryTest.class

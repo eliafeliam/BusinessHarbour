@@ -6,7 +6,7 @@ import org.hibernate.id.IdentifierGenerator;
 
 import java.io.Serializable;
 import java.util.Random;
-//Генератор id для заказов замещающий стандартный генератор
+// Generator id dla zamówień zastępczy generator standardowy
 public class RandomIdGenerator implements IdentifierGenerator {
     private Random random = new Random();
     public static int randomId;

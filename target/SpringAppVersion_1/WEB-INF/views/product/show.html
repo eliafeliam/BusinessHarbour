@@ -10,11 +10,11 @@
 </head>
 <header th:insert="main/header::headerPlusCss" ></header>
 
-<body>
+<body style="background-image: url(/images/mainPage/background.jpg)">
 <form style="margin-left: 35%" class="form-signin"  th:method="GET" th:action="@{/employee/{id}/edit(id=${selectedElement.getId()})}" th:object="${selectedElement}">
     <div class="text-center mb-4">
         <h1 th:text="${selectedElement.getTitle()}" id="title"  style="width: 50%" class="h3 mb-3 font-weight-normal"></h1>
-        <p style="width: 50%">Измените необходимые данные и отправльте изменения в базу данных</a></p>
+        <p style="width: 50%">Zmień wymagane dane i prześlij zmiany do bazy danych</a></p>
     </div>
 
 
@@ -24,26 +24,26 @@
     </div>
 
     <div class="form-label-group">
-        <label for="price">Стоиомость</label>
+        <label for="price">Koszt</label>
         <input readonly th:field="*{price}" type="text" id="price" class="form-control" placeholder="price" required="" style="width: 50%">
 
     </div>
 
     <div class="form-label-group">
-        <label for="description">Описание</label>
+        <label for="description">Opis</label>
         <textarea readonly th:field="*{description}" type="text" id="description" class="form-control" placeholder="description" required="" style="width: 50%;"></textarea>
     </div>
 
     <div class="form-label-group">
-        <label for="description">Название изображения</label>
+        <label for="description">Tytuł zdjęcia</label>
         <input readonly th:field="*{title_image}" type="text" id="title_image" class="form-control" placeholder="description" required="" style="width: 50%;"></input>
     </div>
     <div>
         <form>
-            <button style="float: left;" class="btn btn-primary"  type="submit">ИЗМЕНИТЬ</button>
+            <button style="float: left;" class="btn btn-primary"  type="submit">Zmienić</button>
         </form>
         <form th:method="DELETE" th:action="@{/employee/{id}(id=${selectedElement.getId()})}">
-            <button style="margin-left:240px;" class="btn btn-danger" type="submit" value="Delete" >УДАЛИТЬ</button>
+            <button style="margin-left:240px;" class="btn btn-danger" type="submit" value="Delete" >Usunąć</button>
         </form>
     </div>
     <p class="mt-5 mb-3 text-muted text-center">© 1998-2022</p>

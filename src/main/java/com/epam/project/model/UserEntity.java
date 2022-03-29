@@ -9,56 +9,54 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
-
-//Геттеры сетеры
-
+//Encja dla użytkownika Spring
+//Gettery setery
 @Data
 @AllArgsConstructor
 @Component
-//Сущность в БД
+//Podmiot w bazie danych
 @Entity
-//Связь с таблицей users
+//Relacje z tabelą użytkowników
 @Table(name = "users")
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // Powiąż z nazwami rzeczywistych kolumn z bazy danych
     @Column(name = "first_name")
-    @NotEmpty(message = "Имя не может быть пустым")
-    @Size(min = 2, max = 30, message = "Имя должно быть не менее 2 букв и не более 30")
+    @NotEmpty(message = "Nazwa nie może być pusta")
+    @Size(min = 2, max = 30, message = "Imię musi mieć co najmniej 2 litery i nie więcej niż 30")
     private String firstName;
 
     @Column(name = "last_name")
-    @NotEmpty(message = "Фамилия не может быть пустой")
-    @Size(min = 2, max = 30, message = "Фамилия не может быть меньше 2 символов и больше 30")
+    @NotEmpty(message = "Nazwisko nie może być puste")
+    @Size(min = 2, max = 30, message = "Nazwisko nie może mieć mniej niż 2 znaki i więcej niż 30")
     private String lastName;
 
-    @Column(name = "email") //Привязываем к названиям реальных столбцов из БД
-    @NotEmpty(message = "Email необходимо заполнить")
-    @Email(message = "Некорректный Email")
+    @Column(name = "email")
+    @NotEmpty(message = "Email należy wypełnić")
+    @Email(message = "Niepoprawny Email")
     private String email;
 
     @Column(name = "password")
-    @NotEmpty(message = "Пароль не может быть пустым")
+    @NotEmpty(message = "Hasło nie może być puste")
     private String password;
 
     @Transient
     private String passwordConfirm;
 
-
-    @Enumerated(value = EnumType.STRING) //Отметили enum
+    // Określono Typ enum
+    @Enumerated(value = EnumType.STRING)
     @Column(name = "role")
     private Role role;
 
 
-    @Enumerated(value = EnumType.STRING) //Отметили enum
+    @Enumerated(value = EnumType.STRING)
     @Column(name = "status")
     private Status status;
 
-    public UserEntity() {
-
-    }
+    public UserEntity() {}
 
     public UserEntity(String email) {
         this.email = email;

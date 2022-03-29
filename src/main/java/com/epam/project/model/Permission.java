@@ -1,13 +1,13 @@
 package com.epam.project.model;
 
-//Перечисление прав
+// Wyliczenie praw
 public enum Permission {
-    //Разрешения, включающие в себя атрибуты правконкретной роли
+    //Uprawnienia zawierające atrybuty uprawnień określonej roli
     READ("read"),
     ADMIN_WRITE("admin:write"),
     EMPLOYEE_WRITE("employee:write");
 
-    //Обьект разрешений
+    // Uprawnienia obiektu
     private final String permission;
 
     Permission(String permission) {

@@ -26,7 +26,7 @@ public class RegistrationController {
     private final UserRepository userRepository;
 
     public RegistrationController(UserRepository userRepository, JdbcTemplate jdbcTemplate,
-                                   PasswordEncoder passwordEncoder) {
+                                  PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.jdbcTemplate = jdbcTemplate;
         this.passwordEncoder = passwordEncoder;
@@ -52,10 +52,10 @@ public class RegistrationController {
                     "Пользователь с таким Email уже существует");
             return "main/registration";
         }
-            userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
-            userEntity.setRole(Role.USER);
-            userEntity.setStatus(Status.ACTIVE);
-            userRepository.save(userEntity);
-            return "redirect:/login";
+        userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
+        userEntity.setRole(Role.USER);
+        userEntity.setStatus(Status.ACTIVE);
+        userRepository.save(userEntity);
+        return "redirect:/login";
     }
 }

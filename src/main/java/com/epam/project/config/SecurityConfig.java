@@ -15,10 +15,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-//При успешном логине присваюваются куки JSESSIONID
-//Создаётся сессия для этого пользователя
-//в Request запроса передаётся JSESSIONID на его основании получаем доступ к данным.
-//Пытались попастьна одну страницу - папали на неё после авторизации
+/* Po pomyślnym zalogowaniu przypisywane są pliki cookie JSESSIONID
+Sesja została utworzona dla tego użytkownika
+JSESSIONID jest przekazywany do żądania Request, na jego podstawie uzyskujemy dostęp do danych.
+Próbowałem dostać się do jednej strony - spadłem na nią po autoryzacji*/
 
 @Configuration
 @EnableWebSecurity
@@ -27,63 +27,65 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
 
-    //Через конструктор внедряем userDetailsService и указываем через qualifier что нужен именно наш сервис
+    // Poprzez konstruktor wprowadzamy userDetailsService i wskazujemy
+    // poprzez kwalifikator, że nasza usługa jest potrzebna
     @Autowired
     public SecurityConfig(@Qualifier("userDetailsServiceImpl") UserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
 
-    //Определим свою http конфигурацию, настроим login  и logout
+    // Zdefiniuj naszą konfigurację http, skonfiguruj logowanie i wylogowanie
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                //crossSiteRequestForgery(механизм защиты от crsf угрозы)
+                //crossSiteRequestForgery(mechanizm ochrony przed zagrożeniem csrf)
                 .csrf().disable()
 
-                //К каким страницам пользватель имеет доступ
+                //Do jakich stron użytkownik ma dostęp
                 .authorizeRequests()
                 .antMatchers("/admin/**").hasAuthority("admin:write")
 
                 .antMatchers("/employee/**").hasAnyAuthority("employee:write","admin:write")
 
-//               Доступ разрешен всем пользователей
+                //Dostęp dozwolony dla wszystkich użytkowników
                 .antMatchers("/furniture/**").permitAll()
 
-                //Доступ только для не зарегистрированных пользователей
+                // Dostęp tylko dla niezarejestrowanych użytkowników
                 .antMatchers("/register").not().fullyAuthenticated()
 
-                //Добавляем ещё 2 endPoint
-                //И включаем переопределение формы авторизации
+                //Dodaj 2 dodatkowe punkty końcowe
+                // i włącz nadpisanie formularza autoryzacji
                 .and()
                 .formLogin()
-                //Все имеют доступ к этой странице
+                //Wszyscy mają dostęp do tej strony
                 .loginPage("/login").permitAll()
-                
-                //Если всё хорошо, перенаправляемся на страницу
+
+                //Jeśli wszystko jest w porządku, przekieruj na stronę
                 .defaultSuccessUrl("/furniture")
 
-                // И также в конфиге учти:
+                // A także w konfiguracji rozważ:
                 .and()
                 .rememberMe().userDetailsService(userDetailsService)
                 .and()
-                //Настроим выход из системы(логаут)
+                //Konfiguruj wylogowanie (wylogowanie)
                 .logout()
-                //logoutRequestMatcher должен быть обработан AntPathRequestMAthcer-ом и метод только POST
+                //logoutRequestMatcher musi być obsługiwany przez
+                // AntPathRequestMAthcer i tylko metodę POST
                 .logoutRequestMatcher(new AntPathRequestMatcher("/auth/logout", "POST"))
-                //А при логауте ИНвалидируем нашу сессию
+                // A po wylogowaniu unieważniamy naszą sesję
                 .invalidateHttpSession(true)
-                //Уничтожь аутентификацию
+                // Zniszcz uwierzytelnianie
                 .clearAuthentication(true)
-                //Удалить куки
+                //Usuń cookies
                 .deleteCookies("JSESSIONID")
-                //Перенаправляем на эту страницу
+                //Przekieruj do tej strony
                 .logoutSuccessUrl("/furniture");
     }
 
-    //Переопределяем конфигурацию
+    //Zastąp konfigurację
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        //Установили для auth вместо стандартного, DAO Authentication
+        //Ustaw dla uwierzytelniania zamiast domyślnego DAO Authentication
         auth.authenticationProvider(daoAuthenticationProvider());
     }
 
@@ -92,16 +94,16 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder(12);
     }
 
-    //Переобпределим провайдер аутентификации котрый использует БД
+    //Zastąp dostawcę uwierzytelniania którego używa baza danych
     @Bean
     protected DaoAuthenticationProvider daoAuthenticationProvider() {
-        //Создали его обьект
+        //Utworzył jego obiekt
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
-        //Задали шифровальшик паролей passwordEncoder
+        //Ustaw koder hasła passwordEncoder
         daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
-        //Установили наш переопределённый userDetailsService
+        //Skonfiguruj nasz nadpisany userDetailsService
         daoAuthenticationProvider.setUserDetailsService(userDetailsService);
-        //Вернули изменённый обьект
+        //Zwrócono zmodyfikowany obiekt
         return daoAuthenticationProvider;
     }
 }

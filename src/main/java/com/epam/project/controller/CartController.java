@@ -4,6 +4,7 @@ import com.epam.project.dao.CartDAO;
 import com.epam.project.dao.EmployeeDAO;
 import com.epam.project.model.CartNote;
 import com.epam.project.model.Product;
+import com.epam.project.utilities.CartArithmetic;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,21 +14,23 @@ import java.security.Principal;
 import java.util.List;
 
 @Controller
+@SessionAttributes("productsList")
 @RequestMapping("/cart")
 public class CartController {
 
     private final CartDAO cartDAO;
     private final EmployeeDAO employeeDAO;
+    private final CartArithmetic cartArithmetic;
 
-
-    public CartController(CartDAO cartDAO, EmployeeDAO employeeDAO) {
+    public CartController(CartDAO cartDAO, EmployeeDAO employeeDAO, CartArithmetic cartArithmetic) {
         this.cartDAO = cartDAO;
         this.employeeDAO = employeeDAO;
+        this.cartArithmetic = cartArithmetic;
     }
 
     //Посмотреть корзину
     @GetMapping
-    public String getCart(@SessionAttribute("productsList") List<Product> productsList,
+    public String getCart(@ModelAttribute("productsList") List<Product> productsList,
                           HttpServletRequest request, Model model) {
         Principal principal = request.getUserPrincipal();
 
@@ -35,10 +38,10 @@ public class CartController {
         int finalAmount;
         //Авторизован?
         if (principal != null) {
-            cart = getCartForRegistered(principal.getName());
+            cart = cartArithmetic.getCartForRegistered(principal.getName());
         }
         else {
-            cart = getCartForUnRegistered(productsList);
+            cart = cartArithmetic.getCartForUnRegistered(productsList);
         }
         model.addAttribute("cart", cart);
         model.addAttribute("finalAmount", cart.getFinalAmount());
@@ -48,14 +51,14 @@ public class CartController {
     //Добавление товара в базу и корзину
     @PostMapping("/addToCart/{idProduct}")
     public String addOrIncrementToCart(@PathVariable("idProduct") int idProduct, HttpServletRequest request,
-                                       @SessionAttribute("productsList") List<Product> productsList) {
+                                       @ModelAttribute("productsList") List<Product> productsList) {
         Principal principal = request.getUserPrincipal();
         CartNote cartNote;
         // //Для зарегистированного пользователя
         if (principal != null) {
             cartDAO.addOrIncrementInCart(principal.getName(),idProduct);
         }
-        //Для незарегестрированного пользователя 
+        //Для незарегестрированного пользователя
         else {
             //Добавляем если нету, удваиваем товар в корзине если уже добавлен
             Product product = employeeDAO.getProductById(idProduct);
@@ -76,7 +79,7 @@ public class CartController {
     @DeleteMapping("/removeElement/{productsID}")
     public String removeElement(@PathVariable("productsID") int idProduct,
                                 HttpServletRequest request, Model model,
-                                @SessionAttribute("productsList") List<Product> productsList) {
+                                @ModelAttribute("productsList") List<Product> productsList) {
         Principal principal = request.getUserPrincipal();
 
         //Для неавторизованого пользователя
@@ -88,14 +91,14 @@ public class CartController {
             if (productsList.contains(product)) {
                 productsList.remove(product);
             }
-            model.addAttribute("finalAmount", sumOfCart(productsList));
+            model.addAttribute("finalAmount", cartArithmetic.sumOfCart(productsList));
         }
         return "redirect:/cart";
     }
 
     @PostMapping("/decrementGoods/{idProduct}")
     public String decrementElement(@PathVariable("idProduct") int idProduct,
-                                   @SessionAttribute("productsList") List<Product> productsList,HttpServletRequest request) {
+                                   @ModelAttribute("productsList") List<Product> productsList,HttpServletRequest request) {
         Principal principal = request.getUserPrincipal();
         //Если авторизован
         if (principal != null) {
@@ -111,30 +114,10 @@ public class CartController {
         return "redirect:/cart";
     }
 
-    public CartNote getCartForRegistered(String id) {
-        //Получили список товаров и их кол-во для данного пользователя
-        List<Product> productsList = cartDAO.getProductsListByEmail(id);
-        int finalAmount = sumOfCart(productsList);
-        CartNote cart = new CartNote(productsList, id, finalAmount);
-        return cart;
-    }
-    public CartNote getCartForUnRegistered(List<Product> productsList) {
-        int finalAmount = sumOfCart(productsList);
-        CartNote cart = new CartNote(productsList,"Guest",finalAmount);
-        return cart;
-    }
-
-    //Посчитать сумму предметов из корзины в списке
-    public int sumOfCart(List<Product> productsList) {
-        int totalCost = 0;
-        int sumOfCart = 0;
-        //Посчитать сумму конкретнго предмета умножив цену на кол-во товара в корзине
-        for (Product product : productsList) {
-            totalCost = product.getCount()*product.getPrice();
-            product.setTotalCost(totalCost);
-            sumOfCart+=totalCost;
-            totalCost = 0;
-        }
-        return sumOfCart;
+    @ModelAttribute("productsList")
+    public static List<Product> getProductList() {
+        CartNote cartNote = new CartNote();
+        List<Product> productsList = cartNote.getListOfProducts();
+        return productsList;
     }
 }

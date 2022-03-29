@@ -28,8 +28,8 @@ public class OrderDAO {
     }
     //Список информации о деталях заказа конкретного заказчика
     public List<OrderInfo> getOrder(int id_order) {
-       return jdbcTemplate.query(
-                   "SELECT order_info.email,order_info.first_name,order_info.last_name, order_info.city,order_info.street,order_info.house,order_info.apartment, order_info.id_order,orders.number,orders.products_id, product.title  FROM order_info INNER JOIN orders ON order_info.id_order = orders.id_order  INNER JOIN product ON orders.products_id = product.id WHERE orders.id_order=?",
+        return jdbcTemplate.query(
+                "SELECT order_info.email,order_info.first_name,order_info.last_name, order_info.city,order_info.street,order_info.house,order_info.apartment, order_info.id_order,orders.number,orders.products_id, product.title  FROM order_info INNER JOIN orders ON order_info.id_order = orders.id_order  INNER JOIN product ON orders.products_id = product.id WHERE orders.id_order=?",
                 new Object[]{id_order},new BeanPropertyRowMapper<>(OrderInfo.class));
     }
     //Удаление элемента из заказа
@@ -60,8 +60,8 @@ public class OrderDAO {
     //Есть ли товар уже в заказе
     public int doesItExistInOrder(int idOrder, int idProduct) {
         OrderInfo orderInfo = jdbcTemplate.query("SELECT number FROM orders WHERE id_order=? AND products_id=?",
-                new Object[]{idOrder, idProduct}, new BeanPropertyRowMapper<>(OrderInfo.class))
+                        new Object[]{idOrder, idProduct}, new BeanPropertyRowMapper<>(OrderInfo.class))
                 .stream().findAny().orElse(null);
         return orderInfo == null? 0 : orderInfo.getNumber();
     }
- }
+}

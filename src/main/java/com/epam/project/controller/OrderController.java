@@ -51,7 +51,7 @@ public class OrderController {
     //Принимаем информацию о заказе
     @PostMapping("/createOrder")
     public String createOrder(@ModelAttribute("order") @Valid OrderInfo orderInfo,
-                              @SessionAttribute("productsList") List<Product> productsList,
+                              @ModelAttribute("productsList") List<Product> productsList,
                               BindingResult bindingResult,
                               Model model, HttpServletRequest request) {
         Principal principal = request.getUserPrincipal();
@@ -77,7 +77,7 @@ public class OrderController {
             // заносим инфромацию в таблицу заказов
             orderDAO.createOrder(productsList, orderInfo);
             //Обнуляем корзину после оформления заказа
-            request.getSession().setAttribute("productsList", StartPageController.getProductList());
+            request.getSession().setAttribute("productsList", CartController.getProductList());
         }
         model.addAttribute("order", orderInfo);
         return "order/orderCompleted";

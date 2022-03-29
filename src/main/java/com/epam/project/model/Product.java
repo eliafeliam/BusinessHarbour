@@ -12,23 +12,22 @@ public class Product {
 
     private int id;
 
-    @NotEmpty(message = "Название не может быть пустым")
-    @Size(min = 2, max = 30, message = "Название должно быть не менее 2 и не более 30 символов")
+    @NotEmpty(message = "Tytuł nie może być pusty")
+    @Size(min = 2, max = 30, message = "Tytuł musi mieć co najmniej 2 i nie więcej niż 30 znaków")
     private String title;
 
-    @Min(value = 0, message = "Цена не может быть 0")
     private int price;
 
     private int totalCost;
 
-    @NotEmpty(message = "Заполните тип")
+    @NotEmpty(message = "Wypełnij typ")
     private String type;
 
-    @NotEmpty(message = "Title_image не может быть пустым")
+    @NotEmpty(message = "Title_image nie może być pusty")
     private String title_image;
 
-    @NotEmpty(message = "Заполните описание")
-    @Size(min = 20, max = 500, message = "Описание не может быть меньше 20 и больше 500 символов")
+    @NotEmpty(message = "Wypełnij opis")
+    @Size(min = 20, max = 500, message = "Opis nie może być mniejszy niż 20 i większy niż 500 znaków")
     private String description;
 
     private int count;
