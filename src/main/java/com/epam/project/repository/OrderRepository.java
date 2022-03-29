@@ -5,7 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Collection;
 
-//Repozytorium do zapisywania zamówień w bazie danych
 public interface OrderRepository extends JpaRepository<OrderInfo, Integer> {
     Collection<OrderInfo> findByEmail(String email);
 }

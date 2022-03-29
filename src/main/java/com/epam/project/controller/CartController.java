@@ -55,7 +55,7 @@ public class CartController {
         if (principal != null) {
             cartDAO.addOrIncrementInCart(principal.getName(),idProduct);
         }
-        //Для незарегестрированного пользователя
+        //Для незарегестрированного пользователя 
         else {
             //Добавляем если нету, удваиваем товар в корзине если уже добавлен
             Product product = employeeDAO.getProductById(idProduct);

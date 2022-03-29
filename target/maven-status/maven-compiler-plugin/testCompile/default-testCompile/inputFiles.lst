@@ -1,6 +1,6 @@
-D:\Polish\EpamProject\src\test\java\project\repository\OrderRepositoryTest.java
-D:\Polish\EpamProject\src\test\java\project\controller\StartPageControllerTest.java
-D:\Polish\EpamProject\src\test\java\project\controller\LoginControllerTest.java
-D:\Polish\EpamProject\src\test\java\project\controller\CartControllerTest.java
-D:\Polish\EpamProject\src\test\java\project\controller\FurnitureControllerTest.java
-D:\Polish\EpamProject\src\test\java\project\repository\UserRepositoryTest.java
+D:\EpamProject\src\test\java\com\epam\project\controller\StartPageControllerTest.java
+D:\EpamProject\src\test\java\com\epam\project\controller\CartControllerTest.java
+D:\EpamProject\src\test\java\com\epam\project\controller\LoginControllerTest.java
+D:\EpamProject\src\test\java\com\epam\project\controller\FurnitureControllerTest.java
+D:\EpamProject\src\test\java\com\epam\project\repository\OrderRepositoryTest.java
+D:\EpamProject\src\test\java\com\epam\project\repository\UserRepositoryTest.java

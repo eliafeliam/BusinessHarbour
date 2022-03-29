@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Created-By: IntelliJ IDEA
+Built-By: ASUS
+Build-Jdk: 17.0.1
+Implementation-Title: SpringWebAppForEPAM
+Implementation-Version: 1.0-SNAPSHOT
+Implementation-Vendor-Id: com.epam.project
+Main-Class: ${start-class}
+

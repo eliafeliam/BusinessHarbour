@@ -24,13 +24,13 @@ public class CartDAO {
                         "INNER JOIN goods_details ON goods_details.id_info = product.id " +
                         "INNER JOIN cart_notes ON cart_notes.id_product = product.id " +
                         "WHERE cart_notes.id_client=?",
-                new Object[]{email}, new BeanPropertyRowMapper<>(Product.class));
+                        new Object[]{email}, new BeanPropertyRowMapper<>(Product.class));
         return productsList;
     }
 
     public void addOrIncrementInCart(String idClient, int idProduct) {
         int quantityOfThisProduct = doesItExistInCart(idClient, idProduct);
-
+        
         if(quantityOfThisProduct>0) {
             jdbcTemplate.update("UPDATE cart_notes SET count=? WHERE id_client=? AND id_product=?",
                     quantityOfThisProduct+1, idClient,idProduct);
@@ -56,7 +56,7 @@ public class CartDAO {
 
     public int doesItExistInCart(String idClient, int idProduct) {
         CartNote countOfElement = jdbcTemplate.query("SELECT count FROM cart_notes " +
-                        "WHERE id_client=? AND id_product=?",new Object[]{idClient, idProduct},
+                "WHERE id_client=? AND id_product=?",new Object[]{idClient, idProduct},
                 new BeanPropertyRowMapper<>(CartNote.class)).stream().findAny().orElse(null);
         return countOfElement==null? 0 : countOfElement.getCount();
     }

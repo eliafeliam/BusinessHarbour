@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
-    <title>Nowy produkt</title>
+    <title>New product</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
     <meta charset="utf-8">
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/floating-labels/">
@@ -10,21 +10,21 @@
 </head>
 <header th:insert="main/header::headerPlusCss" ></header>
 
-<body style="background-image: url(/images/mainPage/background.jpg)">
+<body>
 <form style="margin-left: 35%" class="form-signin"  th:method="POST" th:action="@{/employee}" th:object="${newProduct}">
     <div class="text-center mb-4">
-        <h1 style="width: 50%" class="h3 mb-3 font-weight-normal">Dodawanie nowego obiektu do bazy danych</h1>
-        <p style="width: 50%">Wprowadź poprawne dane produktu i dodaj je do bazy danych</a></p>
+        <h1 style="width: 50%" class="h3 mb-3 font-weight-normal">Добавление нового обьекта в базу данных</h1>
+        <p style="width: 50%">Введите корректные данные о товаре и добавьте их в базу данных</a></p>
     </div>
 
     <div class="form-label-group">
-        <label for="title">Wpisz nazwę produktu</label>
+        <label for="title">Введите название товара</label>
         <input  th:field="*{title}" id="title" class="form-control" placeholder="title" required="" autofocus="" style="width: 50%">
         <div style="color:red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title Error</div>
     </div>
 
     <div class="form-label-group">
-        <label for="subject_input">Wybierz rodzaj produktu</label>
+        <label for="subject_input">Выберите тип товара</label>
         <select th:field="*{type}" placeholder="Тема обращения" name="subject" id="subject_input" required>
             <option value="bed">bed</option>
             <option value="sofa">sofa</option>
@@ -35,24 +35,24 @@
     </div>
 
     <div class="form-label-group">
-        <label for="price">Podaj cenę</label>
+        <label for="price">Введите цену</label>
         <input  th:field="*{price}" type="text" id="price" class="form-control" placeholder="price" required="" style="width: 50%">
         <div style="color:red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Price Error</div>
     </div>
 
     <div class="form-label-group">
-        <label for="description">Wypełnij opis produktu</label>
+        <label for="description">Заполните описание товара</label>
         <textarea th:field="*{description}" type="text" id="description" class="form-control" placeholder="description" required="" style="width: 50%;"></textarea>
         <div style="color:red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Description Error</div>
     </div>
 
     <div class="form-label-group">
-        <label for="title_image">Wpisz nazwę Zdjęcia produktu</label>
+        <label for="title_image">Введите название изображения товара</label>
         <input  th:field="*{title_image}" type="text" id="title_image" class="form-control" placeholder="name.jpg" required="" style="width: 50%">
         <div style="color:red" th:if="${#fields.hasErrors('title_image')}" th:errors="*{title_image}">title_image.jpg error</div>
     </div>
 
-    <button style="float: left;" class="btn btn-primary" type="submit">Utworzyć</button>
+    <button style="float: left;" class="btn btn-primary" type="submit">СОЗДАТЬ</button>
 </form>
 <p  class="mt-5 mb-3 text-muted text-center">© 1998-2022</p>
 

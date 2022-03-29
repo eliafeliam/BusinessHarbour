@@ -39,8 +39,8 @@ public class EmployeeDAO {
 
     public List<Product> getAllItemsWithType(String type) {
         List<Product> productsList = jdbcTemplate.query("SELECT product.id,product.title,product.type," +
-                        "product.price,product.count,goods_details.title_image,goods_details.description " +
-                        "FROM product JOIN goods_details ON goods_details.id_info = product.id WHERE product.type=?",
+                                "product.price,product.count,goods_details.title_image,goods_details.description " +
+                                "FROM product JOIN goods_details ON goods_details.id_info = product.id WHERE product.type=?",
                 new Object[]{type}, new BeanPropertyRowMapper<>(Product.class));
         return productsList;
     }

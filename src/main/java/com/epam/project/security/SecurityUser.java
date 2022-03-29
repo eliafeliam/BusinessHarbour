@@ -10,12 +10,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
-//Implementujemy obiekt UserEntity ze SpringSecurity i definiujemy go po swojemu
-//Celem jest przekształcenie naszego UserEntity w ten, z którym współpracuje Security
+//Реализуем объект UserEntity из SpringSecurity и определим по своему
+//Цель - преобразовать нашего UserEntity-а в того, с которым работает Security
 @Data
 public class SecurityUser implements UserDetails {
 
-    // Definiujemy pola co jest w UserDetails
+    //Определяем поля что есть в UserDetails
     private final String username;
     private final String password;
     private final List<SimpleGrantedAuthority> authorities;
@@ -29,62 +29,62 @@ public class SecurityUser implements UserDetails {
         this.isActive = isActive;
     }
 
-    //Dostosuj naszego użytkownika do Spring Security
+    //Приводим нашего пользователя в соответствие с SpringSecurity
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;
     }
 
-    //Nazwa użytkownika
+    //Имя пользователя
     @Override
     public String getUsername() {
         return username;
     }
 
-    //Hasło
+    //Пароль
     @Override
     public String getPassword() {
         return password;
     }
 
-    //Czy konto wygasło
+    //Не истёк ли срок действия учётной записи
     @Override
     public boolean isAccountNonExpired() {
         return isActive;
     }
 
-    //Zablokowany lub odblokowany użytkownik.
+    //Заблокирован или разблокирован пользователь.
     @Override
     public boolean isAccountNonLocked() {
         return isActive;
     }
 
-    //Czy poświadczenia użytkownika (hasło) wygasły.
+    //Истек ли срок действия учетных данных пользователя (пароля).
     @Override
     public boolean isCredentialsNonExpired() {
         return isActive;
     }
 
-    //Wskazuje, czy użytkownik jest włączony czy wyłączony.
+    //Указывает, включен или отключен пользователь.
     @Override
     public boolean isEnabled() {
         return isActive;
     }
 
-    //Przekształć nasz UserEntity w Bezpieczeństwo użytkownika
+    //Преобразование нашего UserEntity в User Security
     public static UserDetails fromUser(UserEntity userEntity) {
         return new org.springframework.security.core.userdetails.User(
-                // Podaj e-mail jako nazwę
+                //В качестве имя передаём email,
                 userEntity.getEmail(), userEntity.getPassword(),
-                //Włączony lub wyłączony użytkownik
+                //Включен или отключен пользователь
                 userEntity.getStatus().equals(Status.ACTIVE),
-                // Data wygaśnięcia konta
+                //Спрок действия учётной записи
                 userEntity.getStatus().equals(Status.ACTIVE),
-                //Data ważności hasła
+                //Срок действия пароля
                 userEntity.getStatus().equals(Status.ACTIVE),
-                // Czy jest zablokowany?
+                //Не заблокирован ли
                 userEntity.getStatus().equals(Status.ACTIVE),
-                //Lista uprawnień
+                //Список разрешений
                 userEntity.getRole().getAuthorities()
         );
     }

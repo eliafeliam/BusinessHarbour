@@ -1,17 +1,50 @@
 <html style="font-size: 16px;" lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/css/order/completed.css">
+<style>
+    .card {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        max-width: 300px;
+        margin: auto;
+        text-align: center;
+        font-family: arial;
+    }
+
+.title {
+    color: grey;
+    font-size: 18px;
+}
+
+button {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 8px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+}
+
+a {
+    text-decoration: none;
+    font-size: 22px;
+    color: black;
+}
+
+button:hover, a:hover {
+    opacity: 0.7;
+}</style>
 </head>
 
 <header th:insert="main/header::headerPlusCss" ></header>
-<div style="background-image: url(/images/createOrder/background.jpg)">
 <div  class="card">
     <img th:src="@{/images/mainPage/logoOrder.jpg}" alt="logo" style="width:100%">
     <h1 th:text="${order.getFirstName()} +' ' + ${order.getLastName()}">firstName and lastName</h1>
-    <p class="title">Zamówienie pana </p>
-    <p th:text="'Номер: ' + ${order.getIdOrder()}">Numer zamówienia</p>
-    <a href="/furniture"><p><button>Pomyślnie zdobione!</button></p></a>
+    <p class="title">Ваш заказ </p>
+    <p th:text="'Номер: ' + ${order.getIdOrder()}">Номер заказа</p>
+    <a href="/furniture"><p><button>Успешно оформлен!</button></p></a>
 </div>
 <div th:insert="main/footer::footerPlusCss"></div>
 </html>
-</div>

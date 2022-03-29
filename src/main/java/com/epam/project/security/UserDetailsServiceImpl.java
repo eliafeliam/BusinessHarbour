@@ -8,8 +8,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-//Zaimplementuj obiekt UserDetailsService z Spring Security i zdefiniuj go po swojemu
-@Service("userDetailsServiceImpl") //Qualifier name wskaż w nawiasach
+//Реализуем объект UserDetailsService из SpringSecurity и определим по своему
+@Service("userDetailsServiceImpl") //Qualifier name в скобках указываем
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     private final UserRepository userRepository;
@@ -18,13 +18,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         this.userRepository = userRepository;
     }
 
-    //Transformacja encji niestandardowych użytkownika w bezpieczną.
+    //Преобразование пользовательской сущности пользователя, в безопасную.
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        //Po pierwsze, z naszego pakietu otrzymujemy Entity użytkownika, jeśli nie - wyjątek
+        //Сначала получаем нашего userEntity-a из нашего пакета, если нету - исключение
         UserEntity userEntity = userRepository.findByEmail(email).orElseThrow(() ->
                 new UsernameNotFoundException("UserEntity doesn't exists"));
-        //Jeśli tak, zwracamy obiekt User Entity przekonwertowany z naszego do Security
+        //Если есть - возвращаем преобразованный из нашего в Security обьект UserEntity
         return SecurityUser.fromUser(userEntity);
     }
+
 }

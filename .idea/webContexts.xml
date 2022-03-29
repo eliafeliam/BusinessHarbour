@@ -18,8 +18,8 @@
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/furnitureForClients/specificElement.html" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/furnitureForClients" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/furnitureForEmployees/new.html" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/furnitureForEmployees" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/main/header.html" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/main" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/main/mainPage.html" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/main" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/people/edit.html" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/people" />
-        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/product/selectedElement.html" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/product" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/staticElements/footer.html" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/staticElements" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/staticElements/header.html" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/staticElements" />
       </map>

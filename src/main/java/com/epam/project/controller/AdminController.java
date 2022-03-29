@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-//Ten kontroler służy do zmiany istniejącego
-// konta Użytkownika przez administratora.
+
 @Controller
 @RequestMapping("/admin")
 
@@ -20,26 +19,26 @@ public class AdminController {
         this.userRepository = userRepository;
     }
 
-    //Lista wszystkich zarejestrowanych użytkowników
+    //Список всех зарегестрированных пользователей
     @GetMapping()
-    public String userList(Model model) {
+    public String getAllUsers(Model model) {
         List<UserEntity> usersList = userRepository.findAll();
         model.addAttribute("users", usersList);
         return "admin/usersList";
     }
-    //Znajdź użytkownika przez id do zmiany
+    //Получить пользователя по id для изменения
     @GetMapping("/{id}")
-    public String findPersonToEdit(@PathVariable("id") Long id, Model model) {
+    public String findById(@PathVariable("id") Long id, Model model) {
         model.addAttribute("person", userRepository.findById(id).orElse(new UserEntity()));
         return "admin/editPerson";
     }
-    //Pobieranie użytkownika i ustawianie nowych wartości
+    //Получение пользователя и уставнока новых значений
     @PatchMapping()
-    public String editPerson(@ModelAttribute("person") UserEntity person) {
+    public String save(@ModelAttribute("person") UserEntity person) {
         userRepository.save(person);
         return "redirect:/admin";
     }
-    //Usunięcie użytkownika z bazy danych
+    //Удаление пользователя из БД
     @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") Long id) {
         userRepository.deleteById(id);

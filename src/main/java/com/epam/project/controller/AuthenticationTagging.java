@@ -6,8 +6,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 
-//Zawiera informacje o uwierzytelnieniu użytkownika
-//w zależności od tego zmienia się widok strony
+//Содержит информацию о аутентификации пользователя, в зависимости от этого изменяется вид страницы
 @ControllerAdvice
 public class AuthenticationTagging {
     @ModelAttribute("isAuth")

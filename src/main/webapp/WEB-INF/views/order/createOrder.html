@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
-    <title>Złóż zamówienie</title>
+    <title>Офрормить заказ</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
     <meta charset="utf-8">
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/floating-labels/">
@@ -10,15 +10,15 @@
 </head>
 <header th:insert="main/header::headerPlusCss" ></header>
 
-<body style="background-image: url(/images/createOrder/background.jpg)">
+<body>
 <form  style="margin-left: 35%" class="form-signin"  th:method="POST" th:action="@{/order/createOrder}" th:object="${order}">
     <div class="text-center mb-4">
-        <h1 style="width: 50%" class="h3 mb-3 font-weight-normal">Prosimy o wypełnienie formularza w celu złożenia zamówienia</h1>
-        <p style="width: 50%">Po wypełnieniu skontaktujemy się z Państwem</a></p>
+        <h1 style="width: 50%" class="h3 mb-3 font-weight-normal">Пожалуйста, заполните форму для оформления заказа</h1>
+        <p style="width: 50%">После заполнения мы связемся с вами</a></p>
     </div>
 
     <div class="form-label-group">
-        <label th:if="${isAuth=='notAuthorized'}" for="email">Email pana</label>
+        <label th:if="${isAuth=='notAuthorized'}" for="email">Enter email</label>
         <input th:if="${isAuth=='notAuthorized'}"  th:field="*{email}" id="email" class="form-control" placeholder="email" required="" autofocus="" style="width: 50%">
 
         <label th:if="${isAuth=='authorized'}" for="emailAuth">Enter email</label>
@@ -28,41 +28,41 @@
     </div>
 
     <div class="form-label-group">
-        <label for="firstName">imię pana</label>
+        <label for="firstName">Enter firstName</label>
         <input  th:field="*{firstName}" type="text" id="firstName" class="form-control" placeholder="firstName" required="" style="width: 50%">
         <div style="color:red" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">firstName Error</div>
     </div>
 
     <div class="form-label-group">
-        <label for="lastName">nazwisko pana</label>
+        <label for="lastName">Enter last</label>
         <input  th:field="*{lastName}" type="text" id="lastName" class="form-control" placeholder="lastName" required="" style="width: 50%">
         <div style="color:red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">lastName Error</div>
     </div>
 
     <div class="form-label-group">
-        <label for="city">miasto</label>
+        <label for="city">Enter city</label>
         <input th:field="*{city}" type="text" id="city" class="form-control" placeholder="city" required="" style="width: 50%;">
         <div style="color:red" th:if="${#fields.hasErrors('city')}" th:errors="*{city}">city Error</div>
     </div>
 
     <div class="form-label-group">
-        <label for="street">ulica</label>
+        <label for="street">Enter street</label>
         <input th:field="*{street}" type="text" id="street" class="form-control" placeholder="street" required="" style="width: 50%;">
         <div style="color:red" th:if="${#fields.hasErrors('street')}" th:errors="*{street}">street Error</div>
     </div>
 
     <div class="form-label-group">
-        <label for="house">numer domu</label>
+        <label for="house">Enter house</label>
         <input th:field="*{house}" type="text" id="house" class="form-control" placeholder="house" required="" style="width: 50%;">
         <div style="color:red" th:if="${#fields.hasErrors('house')}" th:errors="*{house}">house Error</div>
     </div>
     <div class="form-label-group">
-        <label for="apartment">numer mieszkania</label>
+        <label for="apartment">Enter apartment</label>
         <input th:field="*{apartment}" type="text" id="apartment" class="form-control" placeholder="apartment" required="" style="width: 50%;">
         <div style="color:red" th:if="${#fields.hasErrors('apartment')}" th:errors="*{apartment}">apartment Error</div>
     </div>
 
-    <button style="float: left;" class="btn btn-primary"  type="submit">Złóż zamówienie</button>
+    <button style="float: left;" class="btn btn-primary"  type="submit">Оформить заказ</button>
     <p class="mt-5 mb-3 text-muted text-center">© 1998-2022</p>
 </form>
 

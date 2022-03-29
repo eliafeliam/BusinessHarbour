@@ -7,27 +7,27 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 
-//Lista ról użytkownika, administratora, pracownika
+//У нас есть роли
 public enum Role {
-    // Każda rola ma listę uprawnień (które mają atrybuty odczytu/zapisu)
+    //У каждой роли есть список разрешений( у которых есть атрибуты чтения/записи)
     USER(Set.of(Permission.READ)),
     EMPLOYEE(Set.of(Permission.EMPLOYEE_WRITE, Permission.READ)),
     ADMIN(Set.of(Permission.READ, Permission.ADMIN_WRITE));
 
-    // Każda rola ma ustawione uprawnienia
+    //У каждой роли есть set разрешений
     private final Set<Permission> permissions;
 
-    //Zaakceptuj wszystkie istniejące uprawnienia
+    //Принимаем все существующие разрешения
     Role(Set<Permission> permissions) {
         this.permissions = permissions;
     }
 
-    // Oddać je
+    //Отдаём их
     public Set<Permission> getPermissions() {
         return permissions;
     }
-    /*Na podstawie uprawnień otrzymujemy GrandAuthority, z którym współpracuje ochrona.
-     Musimy przekonwertować nasze uprawnienia na SimpleGrantedAuthority */
+    /*На основании permissions(разрешений) получаем GrandAuthority с которыми работает security.
+    Необходимо наши разрашения конвертировать в обьекты SimpleGrantedAuthority*/
     public Set<SimpleGrantedAuthority> getAuthorities() {
         return getPermissions().stream()
                 .map(permission -> new SimpleGrantedAuthority(permission.getPermission()))

@@ -7,35 +7,36 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 
-//Aby użyć konfiguracji Spring opartej na Javie,
-//ustawiamy ApplicationContext i rejestrujemy konfigurację w Spring Context
+//Для исплользования конфигурации Spring на основе Java
+//Задаём ApplicationContext
+//Теперь нужно зарегистрировать конфигурацию в Spring Context
 public class AppInit extends AbstractAnnotationConfigDispatcherServletInitializer {
-    //Brak kontekstowego katalogu głównego
+    //Корнегого контекста нет
     @Override
     protected Class<?>[] getRootConfigClasses() {
         return null;
     }
-    // Dwie klasy konfiguracyjne, podstawowe zadania i bezpieczeństwo
+    //Два конфигурационных класса, основные задачи и безопасность
     @Override
     protected Class<?>[] getServletConfigClasses() {
         return new Class<?>[]{
                 WebConfig.class, SecurityConfig.class
         };
     }
-    //przetwarzanie których żądań odbywa się w określonych kontekstach
+    //обработка каких запросов осуществляется с помощью опрдеонённых контекстов
     @Override
     protected String[] getServletMappings() {
         return new String[]{"/"};
     }
 
-    //To jest filtr dla Springa, który przetworzy ukryte pole _method, na przykład z żądaniem łatania/usuwania/aktualizacji,
-    //i będzie zmieńiac to na żądanie POST dla html 5
+    //Это фильтр для Spring, который будет обрабатывать скрытое(hidden) поле _method например с patch/delete/update запросом, и будет
+    //превращать его в POST запрос для html 5
     @Override
     public void onStartup(ServletContext aServletContext) throws ServletException {
         super.onStartup(aServletContext);
         registerHiddenFieldFilter(aServletContext);
     }
-    //Skonfiguruj również dla metody _method
+    //Также конфигурация для _method
     private void registerHiddenFieldFilter(ServletContext aContext) {
         aContext.addFilter("hiddenHttpMethodFilter",
                 new HiddenHttpMethodFilter()).addMappingForUrlPatterns(null ,true, "/*");

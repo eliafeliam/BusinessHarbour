@@ -1,6 +1,6 @@
 package com.epam.project.model;
 
-// Statusy użytkownika
+//Статусы пользователя
 public enum Status {
     ACTIVE, BANNED
 }

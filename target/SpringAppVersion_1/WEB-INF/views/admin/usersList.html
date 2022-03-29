@@ -8,7 +8,7 @@
 </head>
 <header th:insert="main/header::headerPlusCss" ></header>
 
-<body style="background-image: url(/images/cart/background.jpg)">
+<body >
 <section class="u-align-center u-clearfix u-image u-section-1" id="carousel_5423">
     <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
         <div class="u-table u-table-responsive u-table-1">
@@ -19,15 +19,16 @@
 
                     <th class="u-table-cell">id</th>
                     <th class="u-table-cell">Email</th>
-                    <th class="u-table-cell">Imię</th>
-                    <th class="u-table-cell">Nazwisko</th>
-                    <th class="u-table-cell">Rola</th>
+                    <th class="u-table-cell">Имя</th>
+                    <th class="u-table-cell">Фамилия</th>
+                    <th class="u-table-cell">Role</th>
                     <th class="u-table-cell">Status</th>
-                    <th class="u-table-cell">Ustawienia</th>
+                    <th class="u-table-cell">Настройки</th>
                 </tr>
                 </thead>
                 <tbody class="u-table-alt-palette-1-dark-3 u-table-body">
-                <h1 style="color: #1c0b0b;  font-family: verdana;text-shadow: 1px 1px 1px #c9c2c2; font-size: 16pt " >Lista zrealizowanych zamówień</h1>
+                <h1 style="color: #017ea6;  font-family: verdana;text-shadow: 4px 3px 2px #504949; " >Список оформленных заказов</h1>
+
                 <tr th:each="person: ${users}" style="height: 65px;">
                     <td style="color: #008580;  font-family: verdana;font-size: 150%;" th:text="${person.getId()}" class="u-table-cell"> </td>
                     <td style="color: #000000;  font-family: verdana;font-size: 150%;" class="u-table-cell"> </td>
@@ -36,8 +37,8 @@
                     <td style="color: #000000;  font-family: verdana;font-size: 150%;" th:text="${person.getRole()}" class="u-table-cell"> </td>
                     <td style="color: #000000;  font-family: verdana;font-size: 150%;" th:text="${person.getStatus()}" class="u-table-cell"> </td>
                     <td>
-                        <form th:method="GET" th:action="@{/admin/{id}(id=${person.getId()})}"> <button class="btn btn-info" type="submit">Zmień użytkownika</button></form></br>
-                        <form th:method="DELETE" th:action="@{/admin/{id}/(id=${person.getId()})}"><button type="submit" class="btn btn-danger">Usuń użytkownika</button></form>
+                        <form th:method="GET" th:action="@{/admin/{id}(id=${person.getId()})}"> <button class="btn btn-info" type="submit">Изменить пользователя</button></form></br>
+                        <form th:method="DELETE" th:action="@{/admin/{id}/(id=${person.getId()})}"><button type="submit" class="btn btn-danger">Удалить пользователя</button></form>
                     </td>
                 </tr>
                 </tbody>
