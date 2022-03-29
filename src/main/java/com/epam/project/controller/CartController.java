@@ -28,15 +28,13 @@ public class CartController {
         this.cartArithmetic = cartArithmetic;
     }
 
-    //Посмотреть корзину
     @GetMapping
     public String getCart(@ModelAttribute("productsList") List<Product> productsList,
                           HttpServletRequest request, Model model) {
         Principal principal = request.getUserPrincipal();
 
         CartNote cart;
-        int finalAmount;
-        //Авторизован?
+        // Jeśli nie jesteś zalogowany
         if (principal != null) {
             cart = cartArithmetic.getCartForRegistered(principal.getName());
         }
@@ -48,24 +46,21 @@ public class CartController {
         return "cart/cart";
     }
 
-    //Добавление товара в базу и корзину
+
     @PostMapping("/addToCart/{idProduct}")
     public String addOrIncrementToCart(@PathVariable("idProduct") int idProduct, HttpServletRequest request,
                                        @ModelAttribute("productsList") List<Product> productsList) {
         Principal principal = request.getUserPrincipal();
-        CartNote cartNote;
-        // //Для зарегистированного пользователя
+        // Jeśli nie jest zalogowany
         if (principal != null) {
             cartDAO.addOrIncrementInCart(principal.getName(),idProduct);
         }
-        //Для незарегестрированного пользователя
         else {
-            //Добавляем если нету, удваиваем товар в корзине если уже добавлен
+            // Jeśli produkt już istnieje
             Product product = employeeDAO.getProductById(idProduct);
             if (productsList.contains(product)) {
                 Product item = productsList.get(productsList.indexOf(product));
                 item.setCount(item.getCount() + 1);
-                //Если продукта ещё нет в корзине
             } else {
                 product.setCount(1);
                 productsList.add(product);
@@ -75,19 +70,16 @@ public class CartController {
     }
 
 
-    //Полное удаление из корзины определённого товара
     @DeleteMapping("/removeElement/{productsID}")
     public String removeElement(@PathVariable("productsID") int idProduct,
                                 HttpServletRequest request, Model model,
                                 @ModelAttribute("productsList") List<Product> productsList) {
         Principal principal = request.getUserPrincipal();
-
-        //Для неавторизованого пользователя
+        // Jeśli nie jest zalogowany
         if (principal != null) {
             cartDAO.removeElement(principal.getName(), idProduct);
         } else {
             Product product = employeeDAO.getProductById(idProduct);
-            //Для неавторизованого пользователя
             if (productsList.contains(product)) {
                 productsList.remove(product);
             }
@@ -100,20 +92,20 @@ public class CartController {
     public String decrementElement(@PathVariable("idProduct") int idProduct,
                                    @ModelAttribute("productsList") List<Product> productsList,HttpServletRequest request) {
         Principal principal = request.getUserPrincipal();
-        //Если авторизован
+        // Jeśli nie jest zalogowany
         if (principal != null) {
             cartDAO.decrementElement(principal.getName(), idProduct);
-            //Если не авторизован
         } else {
             Product product = employeeDAO.getProductById(idProduct);
             product = productsList.get(productsList.indexOf(product));
+            // Aby nie ustawić -1
             if (productsList.contains(product) & product.getCount() > 0) {
                 product.setCount(product.getCount()-1);
             }
         }
         return "redirect:/cart";
     }
-
+    // Do koszyka w sesji
     @ModelAttribute("productsList")
     public static List<Product> getProductList() {
         CartNote cartNote = new CartNote();

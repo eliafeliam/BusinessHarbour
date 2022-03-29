@@ -26,12 +26,9 @@ import java.util.Optional;
 @RequestMapping("/account")
 public class AccountController {
 
-    final
-    UserRepository userRepository;
-    final
-    OrderRepository orderRepository;
-    final
-    PasswordEncoder passwordEncoder;
+    final UserRepository userRepository;
+    final OrderRepository orderRepository;
+    final PasswordEncoder passwordEncoder;
 
     public AccountController(UserRepository userRepository, OrderRepository orderRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
@@ -40,7 +37,7 @@ public class AccountController {
     }
 
     @GetMapping()
-    public String allAboutUser (HttpServletRequest request, Model model) {
+    public String getUser(HttpServletRequest request, Model model) {
         Principal principal = request.getUserPrincipal();
         Optional<UserEntity> user = userRepository.findByEmail(principal.getName());
 

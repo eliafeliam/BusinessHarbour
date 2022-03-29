@@ -23,11 +23,8 @@ public class OrderController {
     final CartDAO cartDAO;
 
     public OrderController(OrderRepository orderRepository, OrderDAO orderDAO, CartDAO cartDAO) {
-        //Используется для создания информации о заказчике
         this.orderRepository = orderRepository;
-        //Используется для создания заказа и сего подробностями
         this.orderDAO = orderDAO;
-        //Получение информации о корзине для заказа
         this.cartDAO = cartDAO;
     }
 
@@ -37,18 +34,15 @@ public class OrderController {
         Principal principal = request.getUserPrincipal();
         //Если не авторизован
         if (principal != null) {
-            //Заполняем преварительно email, во избежание ошибок
             OrderInfo orderInfo = new OrderInfo();
             orderInfo.setEmail(principal.getName());
             model.addAttribute("order", orderInfo);
         } else {
-            //Пустая форма обьекта для заполнения
             model.addAttribute("order", new OrderInfo());
         }
         return "order/createOrder";
     }
 
-    //Принимаем информацию о заказе
     @PostMapping("/createOrder")
     public String createOrder(@ModelAttribute("order") @Valid OrderInfo orderInfo,
                               @ModelAttribute("productsList") List<Product> productsList,
@@ -59,24 +53,16 @@ public class OrderController {
         if (bindingResult.hasErrors()) {
             return "order/createOrder";
         }
-        //Если пользователь  авторизован
         if (principal != null) {
-            //Сохраняем заказ в таблицу с информацией о заказчике с уникальным id
             orderRepository.save(orderInfo);
-            //Получаем корзину из БД
             productsList = cartDAO.getProductsListByEmail(principal.getName());
-            //создаём заказ в таблице заказов
             orderDAO.createOrder(productsList, orderInfo);
-            //Очищаем корзину после успешно офомлненного заказа
             cartDAO.cleanCart(principal.getName());
         }
-        //Не авторизован
+
         else {
-            //Сохраняем заказ в таблицу с информацией о заказчике с уникальным id
             orderRepository.save(orderInfo);
-            // заносим инфромацию в таблицу заказов
             orderDAO.createOrder(productsList, orderInfo);
-            //Обнуляем корзину после оформления заказа
             request.getSession().setAttribute("productsList", CartController.getProductList());
         }
         model.addAttribute("order", orderInfo);

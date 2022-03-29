@@ -2,7 +2,6 @@ package com.epam.project.controller;
 
 import com.epam.project.dao.EmployeeDAO;
 import com.epam.project.model.CallMe;
-import com.epam.project.model.CartNote;
 import com.epam.project.model.Product;
 import com.epam.project.repository.CallRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +28,6 @@ public class StartPageController {
         this.callRepository = callRepository;
     }
 
-    //Показать главную страницу
     @GetMapping()
     public String showMain() {
         return "main/mainPage";
