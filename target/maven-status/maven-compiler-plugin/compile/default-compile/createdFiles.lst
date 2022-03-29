@@ -12,6 +12,7 @@ com\epam\project\controller\AdminController.class
 com\epam\project\model\UserEntity.class
 com\epam\project\model\OrderInfo.class
 com\epam\project\servlet\ServletInitializer.class
+com\epam\project\utilities\CartArithmetic.class
 com\epam\project\controller\FurnitureController.class
 com\epam\project\controller\RegistrationController.class
 com\epam\project\controller\CartController.class

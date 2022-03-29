@@ -1,0 +1,12 @@
+.set {
+    font-size:16px;
+    color: #ffffff;
+    border-left:30px solid #ffffff;
+    border-right:30px solid #ffffff;
+    padding:100px 100px 150px 100px;
+    border-radius:25px;
+    -moz-border-radius:25px;
+    box-shadow:1px 1px 20px #a27a7a;
+    -webkit-box-shadow:1px 1px 10px #CCA6A6;
+    -moz-box-shadow:1px 1px 20px #c79c9c;
+}

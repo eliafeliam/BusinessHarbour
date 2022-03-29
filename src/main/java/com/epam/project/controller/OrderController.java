@@ -45,10 +45,11 @@ public class OrderController {
 
     @PostMapping("/createOrder")
     public String createOrder(@ModelAttribute("order") @Valid OrderInfo orderInfo,
-                              @ModelAttribute("productsList") List<Product> productsList,
                               BindingResult bindingResult,
                               Model model, HttpServletRequest request) {
         Principal principal = request.getUserPrincipal();
+
+        List<Product> productsList;
 
         if (bindingResult.hasErrors()) {
             return "order/createOrder";
@@ -61,6 +62,7 @@ public class OrderController {
         }
 
         else {
+            productsList = (List<Product>) request.getSession().getAttribute("productsList");
             orderRepository.save(orderInfo);
             orderDAO.createOrder(productsList, orderInfo);
             request.getSession().setAttribute("productsList", CartController.getProductList());

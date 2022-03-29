@@ -24,6 +24,7 @@ D:\Polish\EpamProject\src\main\java\com\epam\project\model\Role.java
 D:\Polish\EpamProject\src\main\java\com\epam\project\security\UserDetailsServiceImpl.java
 D:\Polish\EpamProject\src\main\java\com\epam\project\repository\OrderRepository.java
 D:\Polish\EpamProject\src\main\java\com\epam\project\model\Status.java
+D:\Polish\EpamProject\src\main\java\com\epam\project\utilities\CartArithmetic.java
 D:\Polish\EpamProject\src\main\java\com\epam\project\servlet\ServletInitializer.java
 D:\Polish\EpamProject\src\main\java\com\epam\project\config\SecurityConfig.java
 D:\Polish\EpamProject\src\main\java\com\epam\project\controller\CartController.java
