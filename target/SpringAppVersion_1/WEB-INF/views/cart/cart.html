@@ -40,7 +40,7 @@
                     <td style="color: #020000;  font-family: verdana;text-shadow: 2px 2px 2px #c4aeae;font-size: 150%;" th:text="${item.getTotalCost()}" class="u-table-cell">Total cost</td>
                     <td>
                         <form th:method="DELETE" th:action="@{/cart/removeElement/{productsID}(productsID=${item.getId()})}">
-                            <button type="submit" class ="btn btn-primary my-2">Usunąć</button></form><br/>
+                            <button type="submit" class ="btn btn-primary my-2">Usunąć</button></form>
                         <form th:method="POST" th:action="@{/cart/addToCart/{idProduct}(idProduct=${item.getId()})}"><button type="submit" class="btn btn-info">+ 1 przedmiot</button></form><br/>
                         <form th:method="POST" th:action="@{/cart/decrementGoods/{idProduct}(idProduct=${item.getId()})}"><button type="submit" class="btn btn-danger">- 1 przedmiot</button></form>
                     </td>

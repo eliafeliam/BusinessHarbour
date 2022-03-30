@@ -1,10 +1,9 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<title>Rejestracja</title>
 <head> <link type="text/css" rel="stylesheet" href="/css/registration/registration.css">
 </head>
 <header th:insert="main/header::headerPlusCss" ></header>
     <body background="/images/registration/background.jpg">
-    <form th:action="@{/registration}" th:object="${user}" th:method="POST">
+    <form th:action="@{/WEB-INF/views/registration}" th:object="${user}" th:method="POST">
             <div class="container">
                 <h1 style="color: #ffffff; text-shadow: 1px 1px 1px #000000;">Rejestracja</h1>
                 <p style="color: #ffffff; text-shadow: 1px 1px 1px #000000;">Prosimy o wypełnienie danych do rejestracji na stronie.</p>

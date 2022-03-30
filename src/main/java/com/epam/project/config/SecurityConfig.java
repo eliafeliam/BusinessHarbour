@@ -46,8 +46,7 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin/**").hasAuthority("admin:write")
 
                 .antMatchers("/employee/**").hasAnyAuthority("employee:write","admin:write")
-                .antMatchers("/order/getAllOrders").hasAnyAuthority("employee:write","admin:write")
-                .antMatchers("/order/orderParts").hasAnyAuthority("employee:write","admin:write")
+                .antMatchers("/order/**").hasAnyAuthority("employee:write","admin:write")
 
                 //Dostęp dozwolony dla wszystkich użytkowników
                 .antMatchers("/furniture/**").permitAll()
