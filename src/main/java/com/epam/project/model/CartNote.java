@@ -15,12 +15,10 @@ public class CartNote {
     int count;
     int finalAmount;
 
-    public CartNote() {
-    }
-
     public CartNote(List<Product> listOfProducts, String idClient, int finalAmount) {
         this.listOfProducts = listOfProducts;
         this.idClient = idClient;
         this.finalAmount = finalAmount;
     }
+    public CartNote() {}
 }

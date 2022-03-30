@@ -1,6 +1,6 @@
 package com.epam.project.controller;
 
-import com.epam.project.dao.EmployeeDAO;
+import com.epam.project.dao.ProductDAO;
 import com.epam.project.model.CallMe;
 import com.epam.project.model.Product;
 import com.epam.project.repository.CallRepository;
@@ -19,42 +19,42 @@ import java.util.List;
 
 public class StartPageController {
 
-    private final EmployeeDAO employeeDAO;
+    private final ProductDAO productDAO;
     private final CallRepository callRepository;
 
     @Autowired
-    public StartPageController(EmployeeDAO employeeDAO, CallRepository callRepository) {
-        this.employeeDAO = employeeDAO;
+    public StartPageController(ProductDAO productDAO, CallRepository callRepository) {
+        this.productDAO = productDAO;
         this.callRepository = callRepository;
     }
 
     @GetMapping()
-    public String showMain() {
+    public String getStartPage() {
         return "main/mainPage";
     }
 
     @GetMapping("/aboutCompany")
-    public String aboutCompany() {
+    public String getAboutCompany() {
         return "aboutCompany/aboutCompany";
     }
 
     @GetMapping("/ourContacts")
-    public String ourContacts() {
+    public String getOurContacts() {
         return "ourContacts/ourContacts";
     }
 
     @GetMapping("/callMe")
-    public String callMe(@ModelAttribute("user") CallMe user) {
+    public String getCallMe(@ModelAttribute("user") CallMe user) {
         return "callMe/callMe";
     }
 
     @GetMapping("/forbidden")
-    public String forbidden() {
+    public String getForbidden() {
         return "error/forbidden";
     }
 
     @PostMapping("/saveCall")
-    public String saveCall(@ModelAttribute("user") @Valid CallMe callMe, BindingResult bindingResult) {
+    private String saveCall(@ModelAttribute("user") @Valid CallMe callMe, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "callMe/callMe";
         }
@@ -64,8 +64,8 @@ public class StartPageController {
 
     //Посмотреть все имещиеся кровати
     @GetMapping("/showAll/{type}")
-    public String showAllItem(@PathVariable("type") String type, Model model) {
-        List<Product> products = employeeDAO.getAllItemsWithType(type);
+    public String getAllItem(@PathVariable("type") String type, Model model) {
+        List<Product> products = productDAO.getAllItemsWithType(type);
 
         model.addAttribute("allItems", products);
         model.addAttribute("type", type);
@@ -74,8 +74,8 @@ public class StartPageController {
 
     //Получить данные о конкретном товаре
     @GetMapping("{id}")
-    public String showSelectedElement(@PathVariable("id") int id, Model model) {
-        model.addAttribute("selectedElement", employeeDAO.getProductById(id));
+    public String getSelectedElement(@PathVariable("id") int id, Model model) {
+        model.addAttribute("selectedElement", productDAO.getProductById(id));
         return "product/selectedElement";
     }
 }

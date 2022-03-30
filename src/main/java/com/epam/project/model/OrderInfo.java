@@ -7,8 +7,6 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
-import java.util.List;
-import java.util.Objects;
 
 //Сущность для заказа
 @Data
@@ -21,47 +19,47 @@ public class OrderInfo {
     int idOrder;
 
     @Column(name = "email") //Привязываем к названиям реальных столбцов из БД
-    @NotEmpty(message = "Email необходимо заполнить")
-    @Email(message = "Некорректный Email")
+    @NotEmpty(message = "E-mail należy wypełnić")
+    @Email(message = "Niepoprawny Email")
     String email;
 
     @Column(name = "firstName")
     @NotEmpty(message = "")
-    @Size(min = 2, max = 30, message = "Имя должно быть не менее 2 букв и не более 30")
+    @Size(min = 2, max = 30, message = "Nazwa musi mieć co najmniej 2 litery i nie więcej niż 30")
     String firstName;
 
     @Column(name = "lastName")
     @NotEmpty(message = "")
-    @Size(min = 2, max = 30, message = "Фамилия должна быть не менее 2 букв и не более 30")
+    @Size(min = 2, max = 30, message = "Nazwisko musi mieć co najmniej 2 litery i nie więcej niż 30")
     String lastName;
 
     @Column(name = "city")
-    @NotEmpty(message = "Необходимо заполнить колонку 'город'")
+    @NotEmpty(message = "Trzeba wypełnić kolumnę 'miasto'")
     String city;
 
     @Column(name = "street")
-    @NotEmpty(message = "Необходимо заполнить колонку 'улица'")
+    @NotEmpty(message = "Trzeba wypełnić kolumnę 'ulica'")
     String street;
 
     @Column(name = "house")
-    @NotEmpty(message = "Необходимо заполнить колонку 'дом'")
+    @NotEmpty(message = "Trzeba wypełnić kolumnę 'Dom'")
     String house;
 
     @Column(name = "apartment")
     int apartment;
 
-    //Поля помеченные Transient нужны для конечного заполнения полной информации через DAO, а не Hibernate
+    // Pola oznaczone Transient są potrzebne do ostatecznego
+    // wypełnienia pełnych informacji za JDBC Template, a nie Hibernate
     @Transient
-    int products_id;
+    int idProduct;
     @Transient
     int number;
     @Transient
     String title;
 
-    public OrderInfo() {
-    }
-
     public OrderInfo(String email) {
         this.email = email;
     }
+
+    public OrderInfo() {}
 }

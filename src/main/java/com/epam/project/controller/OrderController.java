@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.security.Principal;
 import java.util.*;
 
 @Controller
@@ -28,49 +27,51 @@ public class OrderController {
         this.cartDAO = cartDAO;
     }
 
-
     @GetMapping("/getOrderForm")
-    public String getOrderForm(Model model, HttpServletRequest request) {
-        Principal principal = request.getUserPrincipal();
-        //Если не авторизован
-        if (principal != null) {
-            OrderInfo orderInfo = new OrderInfo();
-            orderInfo.setEmail(principal.getName());
-            model.addAttribute("order", orderInfo);
-        } else {
+    private String getOrderForm(Model model, HttpServletRequest request) {
+        String email = request.getUserPrincipal() == null? "" : request.getUserPrincipal().getName();
+        //Jeśli nie jest zalogowany
+        if (email.isEmpty()) {
             model.addAttribute("order", new OrderInfo());
+        } else {
+            OrderInfo orderInfo = new OrderInfo();
+            orderInfo.setEmail(email);
+            model.addAttribute("order", orderInfo);
         }
         return "order/createOrder";
     }
 
     @PostMapping("/createOrder")
-    public String createOrder(@ModelAttribute("order") @Valid OrderInfo orderInfo,
-                              @ModelAttribute("productsList") List<Product> productsList,
+    private String createOrder(@ModelAttribute("order") @Valid OrderInfo orderInfo,
                               BindingResult bindingResult,
                               Model model, HttpServletRequest request) {
-        Principal principal = request.getUserPrincipal();
+        String email = request.getUserPrincipal() == null? "" : request.getUserPrincipal().getName();
+
+        List<Product> productsList;
 
         if (bindingResult.hasErrors()) {
             return "order/createOrder";
         }
-        if (principal != null) {
+        if (email.isEmpty()) {
+            productsList = (List<Product>) request.getSession().getAttribute("productsList");
             orderRepository.save(orderInfo);
-            productsList = cartDAO.getProductsListByEmail(principal.getName());
             orderDAO.createOrder(productsList, orderInfo);
-            cartDAO.cleanCart(principal.getName());
+            //Opróżniamy kosz
+            request.getSession().setAttribute("productsList", CartController.getProductList());
         }
 
         else {
             orderRepository.save(orderInfo);
+            productsList = cartDAO.getProductsListByEmail(email);
             orderDAO.createOrder(productsList, orderInfo);
-            request.getSession().setAttribute("productsList", CartController.getProductList());
+            cartDAO.cleanCart(email);
         }
         model.addAttribute("order", orderInfo);
         return "order/orderCompleted";
     }
 
     @GetMapping("/getAllOrders")
-    public String getAllOrders(Model model) {
+    private String getAllOrders(Model model) {
         model.addAttribute("ordersList", orderRepository.findAll());
         return "order/allOrders";
     }
@@ -80,23 +81,23 @@ public class OrderController {
         return "order/orderParts";
     }
     @DeleteMapping("/removeElement/{idOrder}/{idProduct}")
-    public String removeElement(@PathVariable("idOrder") int idOrder, @PathVariable("idProduct") int idProduct) {
+    private String removeElement(@PathVariable("idOrder") int idOrder, @PathVariable("idProduct") int idProduct) {
         orderDAO.removeElement(idOrder, idProduct);
         return "redirect:/order/getSelectedOrder/" + idOrder;
     }
     @DeleteMapping("/removeOrder/{idOrder}")
-    public String removeOrder(@PathVariable("idOrder") int idOrder) {
+    private String removeOrder(@PathVariable("idOrder") int idOrder) {
         orderDAO.removeOrder(idOrder);
         orderRepository.deleteById(idOrder);
         return "redirect:/order/getAllOrders";
     }
     @PatchMapping("/incrementElement/{idOrder}/{idProduct}")
-    public String incrementElement(@PathVariable("idOrder") int idOrder, @PathVariable("idProduct") int idProduct) {
+    private String incrementElement(@PathVariable("idOrder") int idOrder, @PathVariable("idProduct") int idProduct) {
         orderDAO.incrementElement(idOrder, idProduct);
         return "redirect:/order/getSelectedOrder/" + idOrder;
     }
     @PatchMapping("/decrementElement/{idOrder}/{idProduct}")
-    public String decrementElement(@PathVariable("idOrder") int idOrder, @PathVariable("idProduct") int idProduct) {
+    private String decrementElement(@PathVariable("idOrder") int idOrder, @PathVariable("idProduct") int idProduct) {
         orderDAO.decrementElement(idOrder, idProduct);
         return "redirect:/order/getSelectedOrder/" + idOrder;
     }

@@ -22,26 +22,26 @@ public class AdminController {
 
     //Lista wszystkich zarejestrowanych użytkowników
     @GetMapping()
-    public String userList(Model model) {
+    private String userList(Model model) {
         List<UserEntity> usersList = userRepository.findAll();
         model.addAttribute("users", usersList);
         return "admin/usersList";
     }
     //Znajdź użytkownika przez id do zmiany
     @GetMapping("/{id}")
-    public String findPersonToEdit(@PathVariable("id") Long id, Model model) {
+    private String findPersonToEdit(@PathVariable("id") Long id, Model model) {
         model.addAttribute("person", userRepository.findById(id).orElse(new UserEntity()));
         return "admin/editPerson";
     }
     //Pobieranie użytkownika i ustawianie nowych wartości
     @PatchMapping()
-    public String editPerson(@ModelAttribute("person") UserEntity person) {
+    private String editPerson(@ModelAttribute("person") UserEntity person) {
         userRepository.save(person);
         return "redirect:/admin";
     }
     //Usunięcie użytkownika z bazy danych
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable("id") Long id) {
+    private String delete(@PathVariable("id") Long id) {
         userRepository.deleteById(id);
         return "redirect:/admin";
     }

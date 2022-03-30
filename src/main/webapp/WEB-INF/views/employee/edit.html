@@ -18,31 +18,31 @@
     </div>
 
     <div class="form-label-group">
-        <label for="title">Enter title</label>
+        <label for="title">Wpisz nazwę</label>
         <input  th:field="*{title}" id="title" class="form-control" placeholder="title" required="" autofocus="" style="width: 50%">
         <div style="color:red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title Error</div>
     </div>
 
     <div class="form-label-group">
-        <label for="type">Enter type</label>
+        <label for="type">Wpisz typ</label>
         <input  th:field="*{type}" type="text" id="type" class="form-control" placeholder="type" required="" style="width: 50%">
         <div style="color:red" th:if="${#fields.hasErrors('type')}" th:errors="*{type}">Type Error</div>
     </div>
 
     <div class="form-label-group">
-        <label for="price">Enter price</label>
+        <label for="price">Podaj cenę</label>
         <input  th:field="*{price}" type="text" id="price" class="form-control" placeholder="price" required="" style="width: 50%">
         <div style="color:red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Price Error</div>
     </div>
 
     <div class="form-label-group">
-        <label for="description">Enter description</label>
+        <label for="description">Napisz opis</label>
         <textarea th:field="*{description}" type="text" id="description" class="form-control" placeholder="description" required="" style="width: 50%;"></textarea>
         <div style="color:red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Description Error</div>
     </div>
 
     <div class="form-label-group">
-        <label for="description">Tytuł Zdjęcia</label>
+        <label for="description">description</label>
         <input  th:field="*{title_image}" type="text" id="title_image" class="form-control" placeholder="description" required="" style="width: 50%;"></input>
     </div>
 

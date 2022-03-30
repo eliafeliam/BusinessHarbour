@@ -38,18 +38,18 @@ public class RegistrationController {
     }
 
     @PostMapping("/registration")
-    public String userRegistration(@ModelAttribute("user") @Valid UserEntity userEntity,
+    private String userRegistration(@ModelAttribute("user") @Valid UserEntity userEntity,
                                    BindingResult bindingResult, Model model){
         if (bindingResult.hasErrors()) {
             return "registration/registration";
         }
         if (!userEntity.getPassword().equals(userEntity.getPasswordConfirm())){
-            model.addAttribute("passwordError", "Пароли не совпадают");
+            model.addAttribute("passwordError", "Hasła nie pasują");
             return "registration/registration";
         }
         if (userRepository.findByEmail(userEntity.getEmail()).isPresent()){
             model.addAttribute("emailIsAlreadyExist",
-                    "Пользователь с таким Email уже существует");
+                    "Użytkownik z takim e-mailem już istnieje");
             return "registration/registration";
         }
         userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import com.epam.project.dao.EmployeeDAO;
+import com.epam.project.dao.ProductDAO;
 
 import javax.validation.Valid;
 
@@ -15,62 +15,62 @@ import javax.validation.Valid;
 @RequestMapping("/employee")
 public class FurnitureController {
 
-    private final EmployeeDAO employeeDAO;
+    private final ProductDAO productDAO;
     final OrderRepository orderRepository;
 
 
     @Autowired
-    public FurnitureController(EmployeeDAO employeeDAO, OrderRepository orderRepository) {
-        this.employeeDAO = employeeDAO;
+    public FurnitureController(ProductDAO productDAO, OrderRepository orderRepository) {
+        this.productDAO = productDAO;
         this.orderRepository = orderRepository;
     }
     @GetMapping()
-    public String index(Model model) {
-        model.addAttribute("productList", employeeDAO.getAllProducts());
+    private String index(Model model) {
+        model.addAttribute("productList", productDAO.getAllProducts());
         return "employee/allProducts";
     }
 
     @GetMapping("/{id}")
-    public String show(@PathVariable("id") int id, Model model) {
-        model.addAttribute("selectedElement", employeeDAO.getProductById(id));
+    private String show(@PathVariable("id") int id, Model model) {
+        model.addAttribute("selectedElement", productDAO.getProductById(id));
         return "employee/show";
     }
 
     @GetMapping("/new")
     //ModelAttribute создаёт новый обьект типа Product и передаёт его в модель под ключём goods в представление
-    public String newPerson(@ModelAttribute("newProduct") Product goods) {
+    private String newPerson(@ModelAttribute("newProduct") Product goods) {
         return "employee/new";
     }
 
     @PostMapping()
-    public String create(@ModelAttribute("newProduct") @Valid Product goods,
+    private String create(@ModelAttribute("newProduct") @Valid Product goods,
                          BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return "employee/new";
 
-        employeeDAO.save(goods);
+        productDAO.save(goods);
         return "redirect:/employee";
     }
 
     @GetMapping("/{id}/edit")
-    public String edit(Model model, @PathVariable("id") int id) {
-        model.addAttribute("selectedElement", employeeDAO.getProductById(id));
+    private String edit(Model model, @PathVariable("id") int id) {
+        model.addAttribute("selectedElement", productDAO.getProductById(id));
         return "employee/edit";
     }
 
     @PatchMapping("/{id}")
-    public String update(@ModelAttribute("selectedElement") @Valid Product goods, BindingResult bindingResult,
-                         @PathVariable("id") int id) {
-        if (bindingResult.hasErrors())
+    private String update(@ModelAttribute("selectedElement") @Valid Product goods,
+                          BindingResult bindingResult, @PathVariable("id") int id) {
+        if (bindingResult.hasErrors()) {
             return "employee/edit";
-
-        employeeDAO.update(id, goods);
+        }
+        productDAO.update(id, goods);
         return "redirect:/employee";
     }
 
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable("id") int id) {
-        employeeDAO.delete(id);
+    private String delete(@PathVariable("id") int id) {
+        productDAO.delete(id);
         return "redirect:/employee";
     }
 }

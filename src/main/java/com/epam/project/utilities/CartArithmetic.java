@@ -1,16 +1,21 @@
 package com.epam.project.utilities;
 
 import com.epam.project.dao.CartDAO;
+import com.epam.project.dao.ProductDAO;
 import com.epam.project.model.CartNote;
 import com.epam.project.model.Product;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 @Component
 public class CartArithmetic {
-    @Autowired
-    CartDAO cartDAO;
+    final CartDAO cartDAO;
+    final ProductDAO productDAO;
+
+    public CartArithmetic(CartDAO cartDAO, ProductDAO productDAO) {
+        this.cartDAO = cartDAO;
+        this.productDAO = productDAO;
+    }
 
     public  CartNote getCartForRegistered(String id) {
         //Получили список товаров и их кол-во для данного пользователя
@@ -37,5 +42,16 @@ public class CartArithmetic {
             totalCost = 0;
         }
         return sumOfCart;
+    }
+    public List<Product> addOrIncrementToCart(int idProduct,List<Product> productsList) {
+        Product product = productDAO.getProductById(idProduct);
+        if (productsList.contains(product)) {
+            Product item = productsList.get(productsList.indexOf(product));
+            item.setCount(item.getCount() + 1);
+        } else {
+            product.setCount(1);
+            productsList.add(product);
+        }
+        return productsList;
     }
 }

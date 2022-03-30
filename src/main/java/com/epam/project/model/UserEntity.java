@@ -51,14 +51,13 @@ public class UserEntity {
     @Column(name = "role")
     private Role role;
 
-
     @Enumerated(value = EnumType.STRING)
     @Column(name = "status")
     private Status status;
 
-    public UserEntity() {}
-
     public UserEntity(String email) {
         this.email = email;
     }
+
+    public UserEntity() {}
 }

@@ -30,14 +30,14 @@
                 <tr th:each="order: ${orderParts}" style="height: 65px;">
                     <td style="color: #008580;  font-family: verdana;font-size: 150%;" th:text="${order.getEmail()}" class="u-table-cell"> </td>
                     <td style="color: #008580;  font-family: verdana;font-size: 150%;" th:text="${order.getIdOrder()}" class="u-table-cell"> </td>
-                    <td style="color: #000000;  font-family: verdana;font-size: 150%;" th:text="${order.getProducts_id()}" class="u-table-cell"> </td>
+                    <td style="color: #000000;  font-family: verdana;font-size: 150%;" th:text="${order.getIdProduct()}" class="u-table-cell"> </td>
                     <td style="color: #000000;  font-family: verdana;font-size: 150%;" th:text="${order.getTitle()}" class="u-table-cell"> </td>
                     <td style="color: #000000;  font-family: verdana;font-size: 150%;" th:text="${order.getNumber()}" class="u-table-cell"> </td>
                     <td>
-                        <form th:method="DELETE" th:action="@{/order/removeElement/{idOrder}/{idProduct}(idOrder=${order.getIdOrder()}, idProduct=${order.getProducts_id()})}">
+                        <form th:method="DELETE" th:action="@{/order/removeElement/{idOrder}/{idProduct}(idOrder=${order.getIdOrder()}, idProduct=${order.getIdProduct()})}">
                             <button type="submit" class ="btn btn-primary my-2">Usunąć</button></form></br>
-                        <form  th:method="PATCH" th:action="@{/order/incrementElement/{idOrder}/{idProduct}(idOrder=${order.getIdOrder()}, idProduct=${order.getProducts_id()})}"><button type="submit" class="btn btn-info">+ 1 produkt</button></form><br/>
-                        <form th:method="PATCH" th:action="@{/order/decrementElement/{idOrder}/{idProduct}(idOrder=${order.getIdOrder()}, idProduct=${order.getProducts_id()})}"><button type="submit" class="btn btn-danger">- 1 produkt</button></form>
+                        <form  th:method="PATCH" th:action="@{/order/incrementElement/{idOrder}/{idProduct}(idOrder=${order.getIdOrder()}, idProduct=${order.getIdProduct()})}"><button type="submit" class="btn btn-info">+ 1 produkt</button></form><br/>
+                        <form th:method="PATCH" th:action="@{/order/decrementElement/{idOrder}/{idProduct}(idOrder=${order.getIdOrder()}, idProduct=${order.getIdProduct()})}"><button type="submit" class="btn btn-danger">- 1 produkt</button></form>
                     </td>
                 </tr>
                 </tbody>

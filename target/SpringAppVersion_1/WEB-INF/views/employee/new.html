@@ -11,7 +11,7 @@
 <header th:insert="main/header::headerPlusCss" ></header>
 
 <body style="background-image: url(/images/mainPage/background.jpg)">
-<form style="margin-left: 35%" class="form-signin" th:method="POST" th:action="@{/WEB-INF/views/employee}" th:object="${newProduct}">
+<form style="margin-left: 35%" class="form-signin" th:method="POST" th:action="@{/employee}" th:object="${newProduct}">
     <div class="text-center mb-4">
         <h1 style="width: 50%" class="h3 mb-3 font-weight-normal">Dodawanie nowego obiektu do bazy danych</h1>
         <p style="width: 50%">Wprowadź poprawne dane produktu i dodaj je do bazy danych</a></p>

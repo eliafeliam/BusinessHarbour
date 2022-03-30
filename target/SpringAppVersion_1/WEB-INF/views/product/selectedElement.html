@@ -28,8 +28,7 @@
             </div>
         </div>
         <div class="product-info">
-            <h3 th:text="${selectedElement.getTitle()}" class="product-title">title</h3>
-            <div class="price"  th:text=" 'Koszt : ' + ${selectedElement.getPrice()}+'$'"></div>
+            <h3 style="color: #130169" class="product-title" th:text=" 'Koszt : ' + ${selectedElement.getPrice()}+'$'"></h3>
             <form th:method="POST" th:action="@{/cart/addToCart/{productsID}/(productsID=${selectedElement.getId()})}"><button type="submit" class="btn btn-success">Do koszyka</button></form>
         </div>
         <p style="color: #000000;   font-family: verdana; font-size: 110%; text-indent: 10%; text-shadow: 1px 1px 1px #f1eded" th:text="${selectedElement.getDescription()}"></p> </br>
